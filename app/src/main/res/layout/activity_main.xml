@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Admin Panel"
+            android:id="@+id/toolbar"
+            app:titleTextColor="#4A79E4"
+            android:background="#FFFFFF">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:visibility="gone"
+                    android:layout_width="@dimen/size_35"
+                    android:layout_height="@dimen/size_35"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_left_back_"
+                    />
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rupal Dhruv"
+                    android:layout_toRightOf="@id/back"
+                    android:textSize="16sp"
+                    android:textColor="#4A79E4"
+                    android:fontFamily="@font/muli_semibold" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        app:layout_constraintRight_toLeftOf="@id/count_layout"
+                        android:id="@+id/cart"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_shopping_cart"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        app:layout_constraintRight_toRightOf="@id/cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/cart"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/cart"
+                        android:layout_marginBottom="@dimen/size_4"
+                        android:id="@+id/count_layout"
+                        >
+                        <ImageView
+                            android:id="@+id/red_offer_img"
+                            android:layout_width="@dimen/size_24"
+                            android:layout_height="@dimen/size_24"
+                            android:background="@drawable/ic_red_dot"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            />
+                        <TextView
+                            android:id="@+id/count"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="11"
+                            app:layout_constraintLeft_toLeftOf="@id/red_offer_img"
+                            app:layout_constraintRight_toRightOf="@id/red_offer_img"
+                            app:layout_constraintTop_toTopOf="@id/red_offer_img"
+                            app:layout_constraintBottom_toBottomOf="@id/red_offer_img"
+                            android:padding="@dimen/size_1"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:paddingBottom="@dimen/size_10"
+            android:background="@color/white">
+
+
+            <SearchView
+                android:visibility="visible"
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:layout_marginTop="@dimen/size_20"
+                android:layout_marginLeft="@dimen/size_20"
+                android:layout_marginRight="@dimen/size_20"
+                android:background="@drawable/admin_border"
+                android:iconifiedByDefault="false"
+                android:paddingRight="@dimen/size_35"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="@string/search_product"
+                android:searchIcon="@null"
+                app:voiceIcon="@drawable/ic_mike"
+                android:theme="@style/SearchViewStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryBackground="@android:color/transparent" />
+
+            <ImageView
+                android:id="@+id/microphone"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:visibility="visible"
+                android:layout_marginEnd="@dimen/size_20"
+                android:layout_marginRight="@dimen/size_20"
+                android:background="@color/transparent"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/search"
+                app:layout_constraintEnd_toEndOf="@+id/search"
+                app:layout_constraintTop_toTopOf="@+id/search"
+                app:srcCompat="@drawable/ic_mike"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_below="@id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <!--<androidx.fragment.app.FragmentContainerView
+
+                    android:id="@+id/fragmentContainerView2"
+                    android:name="com.example.b_2_c.ui.home.HomeFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />-->
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

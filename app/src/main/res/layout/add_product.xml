@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/greyish_backgroynd"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/main_container">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/product_recycler_view"/>
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Amount"
+                    android:textSize="@dimen/text_size_16"
+                    android:fontFamily="@font/muli_bold"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extra fee for delivery"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:textSize="@dimen/text_size_12"
+                    android:fontFamily="@font/muli_regular"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/size_1"
+                android:layout_height="@dimen/size_60"
+                android:layout_marginLeft="@dimen/size_100"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Rs_100"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size_5"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_22"
+                android:fontFamily="@font/muli_bold"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
