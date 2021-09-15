@@ -11,8 +11,8 @@ import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.databinding.ProductItemViewBinding
 import com.Frndzcart.frndzcart.fragment.Cartfragment
-import com.cinntra.salesB2C.`interface`.counter
-import com.cinntra.salesB2C.`interface`.setvisibility
+import com.Frndzcart.frndzcart.`interface`.counter
+import com.Frndzcart.frndzcart.`interface`.setvisibility
 import kotlinx.android.synthetic.main.product_item_view.view.*
 
 class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {

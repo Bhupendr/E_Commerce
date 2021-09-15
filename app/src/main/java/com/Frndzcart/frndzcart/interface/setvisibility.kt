@@ -1,4 +1,4 @@
-package com.cinntra.salesB2C.`interface`
+package com.Frndzcart.frndzcart.`interface`
 
 interface setvisibility {
     abstract fun setVisibilty(size: Int)

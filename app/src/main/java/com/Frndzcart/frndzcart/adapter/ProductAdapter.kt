@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.model.Item_Model
-import com.cinntra.salesB2C.`interface`.counter
+import com.Frndzcart.frndzcart.`interface`.counter
 
 class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapter<ProductAdapter.Category_Holder>()  {
     private var context: Context? = null

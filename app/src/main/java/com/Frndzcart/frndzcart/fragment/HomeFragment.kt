@@ -10,11 +10,14 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.Frndzcart.frndzcart.model.Image_Slider_model
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.SliderAdapterExample
+import com.Frndzcart.frndzcart.`interface`.DrawerLock
+import com.Frndzcart.frndzcart.activity.MainActivity
 
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -72,5 +75,14 @@ class HomeFragment : Fragment() {
         })
         return root
     }
+    override fun onResume() {
+        super.onResume()
+        (activity as DrawerLock?)!!.setDrawerLocked(false)
+        val toolbar = activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar?.setNavigationOnClickListener{
+            (activity as MainActivity).binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
 
+
+    }
 }

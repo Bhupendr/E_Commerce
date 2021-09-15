@@ -31,7 +31,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/fish_image"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/size_120"/>
+        android:layout_marginTop="@dimen/size_100"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textField"
@@ -48,9 +48,6 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/black"
                 app:hintAnimationEnabled="true"
-                app:helperTextEnabled="true"
-                app:helperText="@string/enter_username"
-                app:helperTextTextColor="@color/colorPrimary"
                 android:hint="@string/username">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -63,9 +60,7 @@
                     android:textSize="@dimen/text_size_16"
                     android:paddingLeft="@dimen/size_10"
                     android:paddingRight="@dimen/size_10"
-                    android:maxLines="1"
-                    app:helperTextEnabled="true"
-                    app:helperText="@string/enter_username"/>
+                    android:maxLines="1"/>
 
 
 
@@ -80,49 +75,45 @@
                 app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
+                app:startIconDrawable="@drawable/ic_baseline_smartphone_24"
                 app:startIconContentDescription="@string/username"
                 app:startIconTint="@color/colorPrimary"
                 android:textColorHint="@color/black"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/green"
                 app:boxStrokeColor="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/mobile_no"
-                app:helperTextEnabled="true"
-                app:helperText="@string/enter_mobile"
-                app:hintAnimationEnabled="true"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:inputType="phone"
                     android:textColor="@color/black"
                     android:fontFamily="@font/muli_regular"
                     android:textSize="@dimen/text_size_16"
                     android:paddingLeft="@dimen/size_10"
                     android:paddingRight="@dimen/size_10"
-                    android:maxLines="1"
-                    app:helperTextEnabled="true"
-                    app:helperText="@string/enter_mobile"/>
+                    android:maxLines="1" />
 
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:layout_width="@dimen/size_160"
-                android:layout_height="wrap_content"
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_55"
                 app:layout_constraintTop_toBottomOf="@id/passwordField"
                 app:backgroundTint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="@string/log_in"
+                android:layout_marginLeft="@dimen/size_30"
+                android:layout_marginRight="@dimen/size_30"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"
                 android:gravity="center"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:fontFamily="@font/muli_bold"
                 android:layout_marginTop="@dimen/size_30"/>
 

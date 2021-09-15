@@ -11,7 +11,7 @@ import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.adapter.CartAdapter
 import com.Frndzcart.frndzcart.databinding.CartBinding
-import com.cinntra.salesB2C.`interface`.setvisibility
+import com.Frndzcart.frndzcart.`interface`.setvisibility
 
 
 class Cartfragment : Fragment(), setvisibility,View.OnClickListener {

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.frndzcart.model.Item_Model
 import com.Frndzcart.frndzcart.R
+import com.Frndzcart.frndzcart.`interface`.DrawerLock
 
 
 class Add_Product_fragment : Fragment() {
@@ -29,13 +30,16 @@ class Add_Product_fragment : Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.add_product, container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as DrawerLock?)!!.setDrawerLocked(true)
+        val toolbar = activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar?.setNavigationOnClickListener{
+            activity?.onBackPressed()
+        }
         val microphone : ImageView  = activity?.findViewById(R.id.microphone)!!
         val cart : ImageView  = activity?.findViewById(R.id.cart)!!
         val search : SearchView = activity?.findViewById(R.id.search)!!
         search.isVisible = true
         microphone.isVisible = true
-
-
         var heading : TextView = activity?.findViewById(R.id.heading) as TextView
         heading.setText("Add Product")
 

@@ -20,20 +20,20 @@ import androidx.fragment.app.Fragment
 import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.fragment.HomeFragment
 import com.Frndzcart.frndzcart.R
+import com.Frndzcart.frndzcart.`interface`.DrawerLock
 import com.Frndzcart.frndzcart.databinding.ActivityMainBinding
 import com.Frndzcart.frndzcart.fragment.Cartfragment
-import com.cinntra.salesB2C.`interface`.counter
+import com.Frndzcart.frndzcart.`interface`.counter
+import com.Frndzcart.frndzcart.`interface`.setvisibility
 import com.google.android.material.navigation.NavigationView
 import java.util.*
 
-class MainActivity : AppCompatActivity(), counter {
+class MainActivity : AppCompatActivity(), counter,DrawerLock {
 
 
     var toggle: ActionBarDrawerToggle? = null
     lateinit var binding : ActivityMainBinding
-    lateinit var search: SearchView
-    lateinit var microphone : ImageView
-    lateinit var cart : ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -46,22 +46,18 @@ class MainActivity : AppCompatActivity(), counter {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        microphone  = findViewById(R.id.microphone)
-        cart  = findViewById(R.id.cart)
-        search  = findViewById(R.id.search)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
 
-        drawerLayout.addDrawerListener(toggle!!)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.open, R.string.close)
+
+        binding.drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
-        microphone.setOnClickListener(View.OnClickListener {
+        binding.microphone.setOnClickListener(View.OnClickListener {
             speechRecognizition()
         })
-        cart.setOnClickListener(View.OnClickListener {
-            search.isVisible = false
-            microphone.isVisible = false
+        binding.cart.setOnClickListener(View.OnClickListener {
+            binding.search.isVisible = false
+            binding.microphone.isVisible = false
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.container, Cartfragment())
             transaction.addToBackStack("back")
@@ -69,22 +65,6 @@ class MainActivity : AppCompatActivity(), counter {
         })
         loadFragment(HomeFragment())
 
-        navView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    onCount(Global.cartList.size)
-                    loadFragment(HomeFragment())
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-
-                R.id.orders ->{
-                    binding.countLayout.isVisible = false
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-
-            }
-            false
-        })
 
     }
 
@@ -112,13 +92,14 @@ class MainActivity : AppCompatActivity(), counter {
         when(requestCode){
             1 -> if (resultCode == RESULT_OK) {
                 val result = data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                search.setQuery(result?.get(0), true)
+                binding.search.setQuery(result?.get(0), true)
             }
 
         }
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
+        Global.hideKeybaord(binding.search,this)
         //switching fragment
         if (fragment != null) {
             supportFragmentManager
@@ -139,4 +120,41 @@ class MainActivity : AppCompatActivity(), counter {
         }
     }
 
+    override fun setDrawerLocked(shouldLock: Boolean) {
+        Global.hideKeybaord(binding.search,this)
+        if(shouldLock){
+//            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_left_back_)
+
+        }else{
+
+            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+            binding.drawerLayout.addDrawerListener(toggle!!)
+            toggle!!.syncState()
+//            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.navView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    onCount(Global.cartList.size)
+                    loadFragment(HomeFragment())
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                }
+
+                R.id.orders ->{
+                    binding.countLayout.isVisible = false
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                }
+
+            }
+            false
+        })
+
+    }
 }
