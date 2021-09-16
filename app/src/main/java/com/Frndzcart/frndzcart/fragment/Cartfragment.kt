@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.Frndzcart.frndzcart.Global.Global
@@ -12,6 +13,7 @@ import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.adapter.CartAdapter
 import com.Frndzcart.frndzcart.databinding.CartBinding
 import com.Frndzcart.frndzcart.`interface`.setvisibility
+import com.Frndzcart.frndzcart.activity.MainActivity
 
 
 class Cartfragment : Fragment(), setvisibility,View.OnClickListener {
@@ -27,11 +29,14 @@ class Cartfragment : Fragment(), setvisibility,View.OnClickListener {
         binding = CartBinding.inflate(layoutInflater)
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         setvisibil(Global.cartList.size)
+        (activity as MainActivity).binding.search.isVisible = false
+        (activity as MainActivity).binding.microphone.isVisible = false
         binding.add.setOnClickListener(this)
         binding.itemEmptyLayout.addProduct.setOnClickListener(this)
         binding.back.setOnClickListener(this)
         binding.itemEmptyLayout.backPress.setOnClickListener(this)
         binding.proceed.setOnClickListener(this)
+
         setAdapter()
         return binding.root
     }

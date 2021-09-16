@@ -18,6 +18,7 @@ import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.SliderAdapterExample
 import com.Frndzcart.frndzcart.`interface`.DrawerLock
 import com.Frndzcart.frndzcart.activity.MainActivity
+import com.Frndzcart.frndzcart.databinding.FragmentHomeBinding
 
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -26,9 +27,9 @@ import com.smarteist.autoimageslider.SliderView
 class HomeFragment : Fragment() {
 
 
-    lateinit var fruits_vegetable_card: CardView
+    lateinit var binding : FragmentHomeBinding
 
-    private lateinit var root: View
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -36,10 +37,9 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
 
-        root = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
 
-        val sliderView: SliderView = root.findViewById(R.id.slider)
 
         val microphone : ImageView = activity?.findViewById(R.id.microphone)!!
         val search : SearchView = activity?.findViewById(R.id.search)!!
@@ -49,32 +49,37 @@ class HomeFragment : Fragment() {
         val heading : TextView = activity?.findViewById(R.id.heading) as TextView
         heading.setText("Rupal Dhruv")
 
-        fruits_vegetable_card = root.findViewById(R.id.fruits_vegetable_card)
         val imagelist = arrayListOf<Image_Slider_model>(
                 Image_Slider_model(R.drawable.banner),
                 Image_Slider_model(R.drawable.banner),
                 Image_Slider_model(R.drawable.banner)
         )
         val sliderAdapter = SliderAdapterExample(imagelist)
-        sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM) //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH)
-        sliderView.setIndicatorSelectedColor(Color.GRAY)
-        sliderView.setIndicatorUnselectedColor(Color.WHITE)
-        sliderView.setScrollTimeInSec(2)
-        sliderView.isAutoCycle = true
-        sliderView.startAutoCycle()
+        binding.slider.setSliderAdapter(sliderAdapter)
+        binding.slider.setIndicatorAnimation(IndicatorAnimationType.WORM) //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        binding.slider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
+        binding.slider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH)
+        binding.slider.setIndicatorSelectedColor(Color.GRAY)
+        binding.slider.setIndicatorUnselectedColor(Color.WHITE)
+        binding.slider.setScrollTimeInSec(2)
+        binding.slider.isAutoCycle = true
+        binding.slider.startAutoCycle()
 
-
-        fruits_vegetable_card.setOnClickListener(View.OnClickListener {
+        (activity as MainActivity).binding.cart.setOnClickListener(View.OnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.container, Add_Product_fragment())
-            transaction?.addToBackStack("back")
+            transaction?.replace(R.id.container, Cartfragment())
+            transaction?.addToBackStack(null)
             transaction?.commit()
         })
-        return root
+        binding.fruitsVegetableCard.setOnClickListener(View.OnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(R.id.container, Add_Product_fragment())
+            transaction?.addToBackStack(null)
+            transaction?.commit()
+        })
+        return binding.root
     }
+
     override fun onResume() {
         super.onResume()
         (activity as DrawerLock?)!!.setDrawerLocked(false)
@@ -82,7 +87,6 @@ class HomeFragment : Fragment() {
         toolbar?.setNavigationOnClickListener{
             (activity as MainActivity).binding.drawerLayout.openDrawer(GravityCompat.START)
         }
-
 
     }
 }

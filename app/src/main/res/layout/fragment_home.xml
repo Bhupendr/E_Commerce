@@ -6,8 +6,372 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <include
-        layout="@layout/app_bar_main"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/greyish_backgroynd"
+            tools:context=".activity.MainActivity">
+
+            <!-- <SearchView
+                 android:id="@+id/search"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/size_50"
+                 android:layout_marginTop="@dimen/size_20"
+                 android:layout_marginLeft="@dimen/size_20"
+                 android:layout_marginRight="@dimen/size_20"
+                 android:background="@drawable/admin_border"
+                 android:iconifiedByDefault="false"
+                 android:paddingRight="@dimen/size_35"
+                 android:queryBackground="@android:color/transparent"
+                 android:queryHint="@string/search_product"
+                 android:searchIcon="@null"
+                 app:voiceIcon="@drawable/ic_mike"
+                 android:theme="@style/SearchViewStyle"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+                 app:queryBackground="@android:color/transparent" />
+
+             <ImageView
+                 android:id="@+id/microphone"
+                 android:layout_width="wrap_content"
+                 android:layout_height="0dp"
+                 android:layout_marginEnd="@dimen/size_20"
+                 android:layout_marginRight="@dimen/size_20"
+                 android:background="@color/transparent"
+                 android:padding="4dp"
+                 android:clickable="true"
+                 android:focusable="true"
+                 app:layout_constraintBottom_toBottomOf="@+id/search"
+                 app:layout_constraintEnd_toEndOf="@+id/search"
+                 app:layout_constraintTop_toTopOf="@+id/search"
+                 app:srcCompat="@drawable/ic_mike"
+                  />-->
+
+            <com.smarteist.autoimageslider.SliderView
+                android:visibility="visible"
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/size_20"
+                android:layout_marginLeft="@dimen/size_20"
+                android:layout_marginTop="@dimen/size_30"
+                android:layout_marginEnd="@dimen/size_20"
+                android:layout_marginRight="@dimen/size_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sliderAnimationDuration="200"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="1" />
+
+
+            <TextView
+                android:id="@+id/categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_20"
+                android:layout_marginLeft="@dimen/size_20"
+                android:layout_marginTop="@dimen/size_10"
+                android:fontFamily="@font/muli_bold"
+                android:text="@string/categories"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider" />
+
+            <TextView
+                android:id="@+id/see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_size_14"
+                android:layout_marginEnd="@dimen/size_24"
+                android:layout_marginRight="@dimen/size_24"
+                android:fontFamily="@font/muli_bold"
+                android:text="@string/see_all"
+                android:textColor="#399C37"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_20"
+                android:layout_marginTop="@dimen/size_20"
+                android:layout_marginRight="@dimen/size_20"
+                android:orientation="horizontal"
+                android:id="@+id/linearLayout1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categories">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fruits_vegetable_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="1"
+                    android:minHeight="150dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_8"
+                    card_view:cardPreventCornerOverlap="false"
+                    card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="@drawable/card_orange_background"
+                        android:minHeight="@dimen/size_150"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/icon"
+                                    android:layout_width="@dimen/size_100"
+                                    android:layout_height="@dimen/size_100"
+                                    android:layout_gravity="center_horizontal"
+                                    android:foregroundGravity="top"
+                                    android:src="@drawable/fruits_vegetable" />
+
+                                <TextView
+                                    android:id="@+id/item_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/size_5"
+                                    android:fontFamily="@font/muli_bold"
+                                    android:gravity="center"
+                                    android:text="@string/fruits"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_12" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/quotation_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minHeight="@dimen/size_150"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_8"
+                    card_view:cardPreventCornerOverlap="false"
+                    card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_purple_background"
+                        android:minHeight="@dimen/size_150"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/quotation_icon"
+                                    android:layout_width="@dimen/size_100"
+                                    android:layout_height="@dimen/size_100"
+                                    android:layout_gravity="center_horizontal"
+                                    android:foregroundGravity="center"
+                                    android:src="@drawable/oil" />
+
+                                <TextView
+                                    android:id="@+id/quotation_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/size_5"
+                                    android:fontFamily="@font/muli_bold"
+                                    android:gravity="center"
+                                    android:text="@string/oil_ghee"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_12" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="@dimen/size_20"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/size_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fruits_vegetables"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="1"
+                    android:minHeight="150dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_8"
+                    card_view:cardPreventCornerOverlap="false"
+                    card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_purple_background"
+                        android:minHeight="@dimen/size_150"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/fruit_img"
+                                    android:layout_width="@dimen/size_100"
+                                    android:layout_height="@dimen/size_100"
+                                    android:layout_gravity="center_horizontal"
+                                    android:foregroundGravity="top"
+                                    android:src="@drawable/fruits_vegetable" />
+
+                                <TextView
+                                    android:id="@+id/fruit_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/size_5"
+                                    android:fontFamily="@font/muli_bold"
+                                    android:gravity="center"
+                                    android:text="@string/vegetables"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_12" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/beverages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minHeight="@dimen/size_150"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/size_8"
+                    card_view:cardPreventCornerOverlap="false"
+                    card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_orange_background"
+                        android:minHeight="@dimen/size_150"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/beveragesicon"
+                                    android:layout_width="@dimen/size_100"
+                                    android:layout_height="@dimen/size_100"
+                                    android:layout_gravity="center_horizontal"
+                                    android:foregroundGravity="top"
+                                    android:src="@drawable/beverages" />
+
+                                <TextView
+                                    android:id="@+id/beveragestext"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/size_10"
+                                    android:fontFamily="@font/muli_bold"
+                                    android:gravity="center"
+                                    android:text="@string/beverages"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_12" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

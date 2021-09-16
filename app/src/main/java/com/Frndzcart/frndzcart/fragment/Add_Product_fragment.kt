@@ -36,7 +36,6 @@ class Add_Product_fragment : Fragment() {
             activity?.onBackPressed()
         }
         val microphone : ImageView  = activity?.findViewById(R.id.microphone)!!
-        val cart : ImageView  = activity?.findViewById(R.id.cart)!!
         val search : SearchView = activity?.findViewById(R.id.search)!!
         search.isVisible = true
         microphone.isVisible = true

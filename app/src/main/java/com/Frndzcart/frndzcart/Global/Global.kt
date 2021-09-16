@@ -8,6 +8,8 @@ import com.Frndzcart.frndzcart.model.Item_Model
 
 object Global {
 
+    const val BASE_URL = "https://www.mdsys.in/"
+
 
     fun hideKeybaord(v: View, context: Context) {
         val inputMethodManager =

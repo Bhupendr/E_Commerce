@@ -25,13 +25,14 @@ import com.Frndzcart.frndzcart.databinding.ActivityMainBinding
 import com.Frndzcart.frndzcart.fragment.Cartfragment
 import com.Frndzcart.frndzcart.`interface`.counter
 import com.Frndzcart.frndzcart.`interface`.setvisibility
+import com.Frndzcart.frndzcart.fragment.OrderFragment
 import com.google.android.material.navigation.NavigationView
 import java.util.*
 
 class MainActivity : AppCompatActivity(), counter,DrawerLock {
 
 
-    var toggle: ActionBarDrawerToggle? = null
+    private var toggle: ActionBarDrawerToggle? = null
     lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,25 +45,18 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
+        binding.search.isVisible = true
+        binding.microphone.isVisible = true
 
-
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.open, R.string.close)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.open, R.string.close)
 
         binding.drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
         binding.microphone.setOnClickListener(View.OnClickListener {
             speechRecognizition()
         })
-        binding.cart.setOnClickListener(View.OnClickListener {
-            binding.search.isVisible = false
-            binding.microphone.isVisible = false
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.container, Cartfragment())
-            transaction.addToBackStack("back")
-            transaction.commit()
-        })
+
         loadFragment(HomeFragment())
 
 
@@ -105,6 +99,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, fragment)
+                    .addToBackStack(null)
                     .commit()
             return true
         }
@@ -148,6 +143,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
                 }
 
                 R.id.orders ->{
+                    loadFragment(OrderFragment())
                     binding.countLayout.isVisible = false
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                 }
