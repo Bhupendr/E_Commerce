@@ -70,14 +70,16 @@ class Cartfragment : Fragment(), setvisibility,View.OnClickListener {
            R.id.add_product,R.id.add ->{
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
                 transaction?.replace(R.id.container, Add_Product_fragment())
-                transaction?.addToBackStack("back")
+                transaction?.addToBackStack(null)
                 transaction?.commit()
             }
             R.id.back,
             R.id.back_press -> {activity?.onBackPressed()}
             R.id.proceed -> {
-                /*val bottomSheetFragment = BottomSheetFragment()
-                bottomSheetFragment.show(requireFragmentManager(), bottomSheetFragment.getTag())*/
+                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                transaction?.replace(R.id.container, AddressSectionFragment())
+                transaction?.addToBackStack(null)
+                transaction?.commit()
             }
 
         }
