@@ -52,35 +52,36 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
 
                 itemView.add_quantity.isVisible = true
                 itemView.add_new_item.isVisible = false
-                itemView.item_name.text = listdata?.item_name
-                itemView.item_price.text = listdata?.item_price
-                itemView.discounted_price.text = listdata?.discount_price
-                itemView.offer_percent.text = listdata!!.off
-                if(listdata.off.isEmpty())
+                itemView.item_name.text = listdata?.title
+                itemView.item_price.text = listdata?.mrp
+                itemView.discounted_price.text = listdata?.price
+            val marginpprice = listdata!!.mrp.toInt() - listdata.price.toInt()
+                itemView.offer_percent.text = marginpprice.toString()
+                if(marginpprice ==0)
                     itemView.red_offer_img.isVisible = false
-                itemView.weight.text = listdata.weght
+//                itemView.weight.text = listdata.weght
 
-                itemView.total.text = listdata.item_quantity.toString()
+                itemView.total.text = listdata.quantity.toString()
                 itemView.add.setOnClickListener(View.OnClickListener {
-                    listdata.item_quantity = 1
+                    listdata.quantity = 1
                     vibe.vibrate(80)
                     itemView.add_quantity.isVisible = true
                     itemView.add_new_item.isVisible = false
-                    itemView.total.text = listdata.item_quantity.toString()
+                    itemView.total.text = listdata.quantity.toString()
 
                 })
 
                 itemView.plus.setOnClickListener(View.OnClickListener {
-                    listdata.item_quantity++
-                    itemView.total.text = listdata.item_quantity.toString()
+                    listdata.quantity++
+                    itemView.total.text = listdata.quantity.toString()
 
                 })
 
                 itemView.minus.setOnClickListener(View.OnClickListener {
 
-                    if(listdata.item_quantity>1){
-                        listdata.item_quantity--
-                        itemView.total.text = listdata.item_quantity.toString()
+                    if(listdata.quantity>1){
+                        listdata.quantity--
+                        itemView.total.text = listdata.quantity.toString()
                     }else{
                         itemView.add_quantity.isVisible = false
                         itemView.add_new_item.isVisible = true
@@ -88,7 +89,7 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                     }
                     count.onCount(Global.cartList.size)
                     visibiltu.setVisibilty(Global.cartList.size)
-                    notifyDataSetChanged()
+//                    notifyDataSetChanged()
                 })
 
         }

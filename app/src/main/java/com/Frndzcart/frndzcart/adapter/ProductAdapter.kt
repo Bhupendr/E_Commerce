@@ -11,10 +11,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
-import com.Frndzcart.frndzcart.model.Item_Model
+import com.Frndzcart.frndzcart.model.ProductResponseItem
 import com.Frndzcart.frndzcart.`interface`.counter
 
-class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapter<ProductAdapter.Category_Holder>()  {
+
+class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerView.Adapter<ProductAdapter.Category_Holder>()  {
     private var context: Context? = null
     lateinit var vibe : Vibrator
     lateinit var count : counter
@@ -45,25 +46,26 @@ class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapte
         if(checkItemInCart(listdata)){
             holder.add_quantity.isVisible = true
             holder.add_new_item.isVisible = false
-            holder.total.text = listdata.item_quantity.toString()
+            holder.total.text = listdata.quantity.toString()
         }
-        holder.item_name.text = listdata.item_name
-        holder.item_price.text = listdata.item_price
-        holder.discounted_price.text = listdata.discount_price
-        holder.offer_percent.text = listdata.off
-        if(listdata.off.isEmpty()){
+        holder.item_name.text = listdata.title
+        holder.item_price.text = listdata.mrp
+        holder.discounted_price.text = listdata.price
+        val marginpprice = listdata.mrp.toInt() - listdata.price.toInt()
+        holder.offer_percent.text = marginpprice.toString()
+        if(marginpprice ==0){
             holder.red_offer_img.isVisible = false
         }else{
             holder.item_price.strike = true
         }
-        holder.weight.text = listdata.weght
+//        holder.weight.text = listdata.weght
 
         holder.add.setOnClickListener(View.OnClickListener {
 
             vibe.vibrate(80)
             holder.add_quantity.isVisible = true
             holder.add_new_item.isVisible = false
-            holder.total.text = listdata.item_quantity.toString()
+            holder.total.text = listdata.quantity.toString()
 
 
 
@@ -76,17 +78,17 @@ class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapte
         })
 
         holder.plus.setOnClickListener(View.OnClickListener {
-            listdata.item_quantity++
-            holder.total.text = listdata.item_quantity.toString()
+            listdata.quantity++
+            holder.total.text = listdata.quantity.toString()
             addquantitytolist(listdata)
 
         })
 
         holder.minus.setOnClickListener(View.OnClickListener {
 
-            if(listdata.item_quantity>1){
-                listdata.item_quantity--
-                holder.total.text = listdata.item_quantity.toString()
+            if(listdata.quantity>1){
+                listdata.quantity--
+                holder.total.text = listdata.quantity.toString()
                 addquantitytolist(listdata)
             }else{
                 holder.add_quantity.isVisible = false
@@ -101,21 +103,21 @@ class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapte
 
     }
 
-    private fun deleteitem(listdata: Item_Model) {
-        for (im:Item_Model? in Global.cartList){
-            if(im!!.item_name.equals(listdata.item_name)){
+    private fun deleteitem(listdata: ProductResponseItem) {
+        for (im:ProductResponseItem? in Global.cartList){
+            if(im!!.id.equals(listdata.id)){
                 Global.cartList.remove(listdata)
             }
-            notifyDataSetChanged()
+//            notifyDataSetChanged()
         }
     }
 
-    private fun addquantitytolist(listdata: Item_Model) {
-        for(im : Item_Model? in Global.cartList){
-            if(im!!.item_name.equals(listdata.item_name)){
+    private fun addquantitytolist(listdata: ProductResponseItem) {
+        for(im : ProductResponseItem? in Global.cartList){
+            if(im!!.id.equals(listdata.id)){
                 Global.cartList.set(Global.cartList.indexOf(im),listdata)
             }
-            notifyDataSetChanged()
+//            notifyDataSetChanged()
 
 
         }
@@ -123,10 +125,10 @@ class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapte
 
     }
 
-    private fun checkItemInCart( listdata: Item_Model):Boolean {
-        for(im : Item_Model? in Global.cartList){
-            if(im!!.item_name.equals(listdata.item_name)){
-                listdata.item_quantity = im.item_quantity
+    private fun checkItemInCart( listdata: ProductResponseItem):Boolean {
+        for(im : ProductResponseItem? in Global.cartList){
+            if(im!!.id.equals(listdata.id)){
+                listdata.quantity = im.quantity
                 return true
             }
         }
@@ -134,11 +136,11 @@ class ProductAdapter(var arrayList: ArrayList<Item_Model>) : RecyclerView.Adapte
     }
 
 
-    private fun addtolist(listdata: Item_Model): Boolean {
-        for (im: Item_Model? in Global.cartList){
-            if(im!!.item_name.equals(listdata.item_name)){
+    private fun addtolist(listdata: ProductResponseItem): Boolean {
+        for (im: ProductResponseItem? in Global.cartList){
+            if(im!!.id.equals(listdata.id)){
 
-                im.item_quantity = im.item_quantity + listdata.item_quantity
+                im.quantity = im.quantity + listdata.quantity
 
                 return false
 

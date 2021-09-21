@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.Frndzcart.frndzcart.model.Item_Model
+import com.Frndzcart.frndzcart.model.ProductResponseItem
 
 
 object Global {
@@ -20,7 +21,7 @@ object Global {
 
 
 
-        var cartList:MutableList<Item_Model?> =  ArrayList()
+        var cartList:MutableList<ProductResponseItem?> =  ArrayList()
 
 
 
