@@ -49,10 +49,12 @@ class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerVi
             holder.total.text = listdata.quantity.toString()
         }
         holder.item_name.text = listdata.title
-        holder.item_price.text = listdata.mrp
-        holder.discounted_price.text = listdata.price
+        holder.item_price.text = "Rs." + listdata.mrp
+        holder.discounted_price.text = "Rs." + listdata.price
+        holder.total.text = listdata.quantity.toString()
         val marginpprice = listdata.mrp.toInt() - listdata.price.toInt()
-        holder.offer_percent.text = marginpprice.toString()
+
+        holder.offer_percent.text = "Rs " + marginpprice.toString() +  " save"
         if(marginpprice ==0){
             holder.red_offer_img.isVisible = false
         }else{
@@ -61,7 +63,7 @@ class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerVi
 //        holder.weight.text = listdata.weght
 
         holder.add.setOnClickListener(View.OnClickListener {
-
+            listdata.quantity = 1
             vibe.vibrate(80)
             holder.add_quantity.isVisible = true
             holder.add_new_item.isVisible = false

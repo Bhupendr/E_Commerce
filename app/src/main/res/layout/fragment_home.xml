@@ -55,7 +55,7 @@
                   />-->
 
             <com.smarteist.autoimageslider.SliderView
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"

@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.model.Image_Slider_model
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.SliderAdapterExample
@@ -43,11 +44,13 @@ class HomeFragment : Fragment() {
 
         val microphone : ImageView = activity?.findViewById(R.id.microphone)!!
         val search : SearchView = activity?.findViewById(R.id.search)!!
+        val cart : ImageView  = activity?.findViewById(R.id.cart)!!
         search.isVisible = true
         microphone.isVisible = true
+        cart.isVisible = true
 
         val heading : TextView = activity?.findViewById(R.id.heading) as TextView
-        heading.setText("Rupal Dhruv")
+        heading.text = Global.name
 
         val imagelist = arrayListOf<Image_Slider_model>(
                 Image_Slider_model(R.drawable.banner),

@@ -206,6 +206,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPersonName"
+                android:id="@+id/address"
                 android:textColor="@color/black"
                 android:fontFamily="@font/muli_regular"
                 android:gravity="start"
@@ -269,6 +270,7 @@
                 android:background="@color/grey"/>
 
             <TextView
+                android:id="@+id/totalcost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Rs_100"

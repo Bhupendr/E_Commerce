@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">E_Commerce</string>
+    <string name="app_name">Urban Choice</string>
     <string name="search_product">Search Product</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
@@ -96,5 +96,9 @@
     <string name="enter_username">Enter Username</string>
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
+    <string name="enternameerror">Enter Name</string>
+    <string name="enterphoneerror">Enter 10 digit Mobile no.</string>
+    <string name="enteremailerror">Enter proper email address</string>
+    <string name="enteraddresserror">Enter delivery address</string>
 
 </resources>

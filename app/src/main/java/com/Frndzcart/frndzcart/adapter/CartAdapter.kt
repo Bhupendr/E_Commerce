@@ -1,10 +1,12 @@
 package com.Frndzcart.frndzcart.adapter
 
 import android.content.Context
+import android.graphics.Paint
 import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.frndzcart.Global.Global
@@ -21,9 +23,11 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
     lateinit var vibe : Vibrator
     lateinit var count : counter
     lateinit var visibiltu : setvisibility
+    lateinit var textView: TextView
 
-     constructor(contxt: Cartfragment) : this() {
+     constructor(contxt: Cartfragment, totalprice: TextView) : this() {
         this.visibiltu = contxt
+        this.textView = totalprice
     }
 
 
@@ -54,16 +58,21 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                 itemView.add_new_item.isVisible = false
                 itemView.item_name.text = listdata?.title
                 itemView.item_price.text = listdata?.mrp
+            Global.pricing = Global.cartList.sumBy {( it!!.quantity * it.price.toDouble()).toInt() }.toDouble()
+
                 itemView.discounted_price.text = listdata?.price
             val marginpprice = listdata!!.mrp.toInt() - listdata.price.toInt()
-                itemView.offer_percent.text = marginpprice.toString()
-                if(marginpprice ==0)
+                itemView.offer_percent.text = "Rs " + marginpprice.toString() +  " save"
+                if(marginpprice ==0) {
                     itemView.red_offer_img.isVisible = false
+                }else{
+                    itemView.item_price.strike = true
+                }
 //                itemView.weight.text = listdata.weght
 
                 itemView.total.text = listdata.quantity.toString()
                 itemView.add.setOnClickListener(View.OnClickListener {
-                    listdata.quantity = 1
+
                     vibe.vibrate(80)
                     itemView.add_quantity.isVisible = true
                     itemView.add_new_item.isVisible = false
@@ -72,9 +81,10 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                 })
 
                 itemView.plus.setOnClickListener(View.OnClickListener {
+
                     listdata.quantity++
                     itemView.total.text = listdata.quantity.toString()
-
+                    notifyDataSetChanged()
                 })
 
                 itemView.minus.setOnClickListener(View.OnClickListener {
@@ -82,6 +92,7 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                     if(listdata.quantity>1){
                         listdata.quantity--
                         itemView.total.text = listdata.quantity.toString()
+                        notifyDataSetChanged()
                     }else{
                         itemView.add_quantity.isVisible = false
                         itemView.add_new_item.isVisible = true
@@ -89,15 +100,12 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                     }
                     count.onCount(Global.cartList.size)
                     visibiltu.setVisibilty(Global.cartList.size)
-//                    notifyDataSetChanged()
+                    notifyDataSetChanged()
                 })
 
         }
 
-
-
-
-
+        textView.text = "Rs: ${Global.pricing}"
 
     }
    inner class Category_Holder(val itemView:  ProductItemViewBinding) : RecyclerView.ViewHolder(itemView.root)
@@ -105,3 +113,9 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
 }
 
 
+inline var TextView.strike: Boolean
+    set(visible) {
+        paintFlags = if (visible) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
+    get() = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG == Paint.STRIKE_THRU_TEXT_FLAG

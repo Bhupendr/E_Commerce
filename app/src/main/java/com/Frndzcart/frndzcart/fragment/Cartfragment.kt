@@ -43,7 +43,7 @@ class Cartfragment : Fragment(), setvisibility,View.OnClickListener {
 
     private fun setAdapter() {
         linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = CartAdapter(this)
+        adapter = CartAdapter(this, binding.totalprice)
         binding.productRecyclerView.layoutManager = linearLayoutManager
         binding.productRecyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
@@ -76,6 +76,8 @@ class Cartfragment : Fragment(), setvisibility,View.OnClickListener {
             R.id.back,
             R.id.back_press -> {activity?.onBackPressed()}
             R.id.proceed -> {
+
+
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
                 transaction?.replace(R.id.container, AddressSectionFragment())
                 transaction?.addToBackStack(null)

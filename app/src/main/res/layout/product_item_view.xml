@@ -29,9 +29,10 @@
             android:id="@+id/item_image"/>
         <ImageView
             android:id="@+id/red_offer_img"
-            android:layout_width="@dimen/size_30"
-            android:layout_height="@dimen/size_30"
-            android:background="@drawable/ic_red_dot"
+            android:layout_width="@dimen/size_35"
+            android:layout_height="@dimen/size_35"
+            android:background="@drawable/dialog_bg"
+            android:backgroundTint="@color/red"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="@dimen/size_5"

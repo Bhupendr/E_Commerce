@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.speech.RecognizerIntent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -152,5 +155,33 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
             false
         })
 
+    }
+
+
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed()
+    {
+
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            var fragments: Int = getSupportFragmentManager().getBackStackEntryCount()
+            if (fragments == 1) {
+                // finish()
+                if (doubleBackToExitPressedOnce) {
+                    System.exit(0)
+                    return
+                }
+
+                this.doubleBackToExitPressedOnce = true
+                Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+                Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+            } else if (fragmentManager.backStackEntryCount > 1) {
+                fragmentManager.popBackStack()
+            } else {
+                super.onBackPressed()
+            }
+        }
     }
 }

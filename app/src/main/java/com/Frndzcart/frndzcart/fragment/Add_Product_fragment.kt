@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.`interface`.DrawerLock
 import com.Frndzcart.frndzcart.model.ProductResponseItem
@@ -38,24 +39,30 @@ class Add_Product_fragment : Fragment() {
             activity?.onBackPressed()
         }
         recyclerView  = root.findViewById(R.id.product_recycler_view)
+        linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         val microphone : ImageView  = activity?.findViewById(R.id.microphone)!!
         val search : SearchView = activity?.findViewById(R.id.search)!!
+        val progressBar : ProgressBar = root.findViewById(R.id.progressBar)
         search.isVisible = true
         microphone.isVisible = true
-        var heading : TextView = activity?.findViewById(R.id.heading) as TextView
-        heading.setText("Add Product")
-        callApi()
+        val heading : TextView = activity?.findViewById(R.id.heading) as TextView
+        heading.text = "Add Product"
+
+        progressBar.isVisible = true
+        if(Global.checkInternet(context)){
+            callApi(progressBar)
+        }
 
         return root
     }
 
 
 
-    private fun callApi() {
+    private fun callApi(progressBar: ProgressBar) {
 
         val model: ProductViewModel =
             ViewModelProviders.of(this).get(ProductViewModel::class.java)
-        model.getProductList()!!.observe(
+        model.getProductList(progressBar)!!.observe(
             viewLifecycleOwner,
             {
 
