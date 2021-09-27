@@ -1,6 +1,6 @@
 package com.Frndzcart.frndzcart.fragment
 
-import ProductAdapter
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.`interface`.DrawerLock
+import com.Frndzcart.frndzcart.adapter.ProductAdapter
 import com.Frndzcart.frndzcart.model.ProductResponseItem
 import com.Frndzcart.frndzcart.model.ProductViewModel
 

@@ -1,3 +1,5 @@
+package com.Frndzcart.frndzcart.adapter
+
 import android.content.Context
 import android.graphics.Paint
 import android.os.Vibrator

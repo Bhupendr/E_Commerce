@@ -66,6 +66,7 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                 if(marginpprice ==0) {
                     itemView.red_offer_img.isVisible = false
                 }else{
+//                    itemView.item_price.strike = true
                     itemView.item_price.strike = true
                 }
 //                itemView.weight.text = listdata.weght
@@ -111,11 +112,3 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
    inner class Category_Holder(val itemView:  ProductItemViewBinding) : RecyclerView.ViewHolder(itemView.root)
 
 }
-
-
-inline var TextView.strike: Boolean
-    set(visible) {
-        paintFlags = if (visible) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-    }
-    get() = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG == Paint.STRIKE_THRU_TEXT_FLAG
