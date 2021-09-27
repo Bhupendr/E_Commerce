@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.E_Commerce">
-        <activity android:name=".activity.LogInActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,6 +25,9 @@
         <activity android:name=".activity.MainActivity"
                 android:screenOrientation="portrait">
 
+        </activity>
+        <activity android:name=".activity.LogInActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

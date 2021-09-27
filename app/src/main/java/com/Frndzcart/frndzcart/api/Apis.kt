@@ -2,6 +2,7 @@ package com.Frndzcart.frndzcart.api
 
 
 import com.Frndzcart.frndzcart.model.LoginResponse
+import com.Frndzcart.frndzcart.model.OrderResponse
 import com.Frndzcart.frndzcart.model.ProductResponse
 import com.Frndzcart.frndzcart.model.ProductResponseItem
 import retrofit2.Call
@@ -17,8 +18,8 @@ interface Apis {
     fun getProductList():Call<List<ProductResponseItem>>
 
 
-/*    @POST("invent/update")
-    fun updateproduct(@Body body: ProductDataModel):Call<ProductResponse>*/
+    @GET
+    fun orderlist(@Url url:String):Call<OrderResponse>
 
 
 

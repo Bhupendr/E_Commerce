@@ -107,7 +107,7 @@
 
 
             <SearchView
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_50"

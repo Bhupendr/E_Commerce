@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/greyish_backgroynd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/size_5"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginLeft="@dimen/size_5"
+        android:layout_marginRight="@dimen/size_5"
+        app:cardElevation="@dimen/size_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/size_10"
+            android:layout_height="wrap_content">
+
+<RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pankaj Sharma"
+                android:textSize="@dimen/text_size_16"
+                android:maxLines="1"
+                android:paddingRight="@dimen/size_90"
+                android:ellipsize="end"
+                android:maxWidth="@dimen/size_80"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:fontFamily="@font/muli_bold"/>
+
+
+
+</RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/orderid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_id"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_regular"/>
+
+                <TextView
+                    android:id="@+id/date_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mar 24, 5:30pm"
+                    android:paddingLeft="@dimen/size_4"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_regular"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Amount :"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_regular"/>
+
+                <TextView
+                    android:id="@+id/total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Rs_100"
+                    android:paddingLeft="@dimen/size_4"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_regular"/>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/order_id_layout"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/order_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delivery_address"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_regular"/>
+
+                <TextView
+                    android:id="@+id/delivry_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="98765667876"
+                    android:layout_toRightOf="@id/order_id"
+                    android:paddingLeft="@dimen/size_4"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_regular"/>
+
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

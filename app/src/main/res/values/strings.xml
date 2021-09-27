@@ -100,5 +100,11 @@
     <string name="enterphoneerror">Enter 10 digit Mobile no.</string>
     <string name="enteremailerror">Enter proper email address</string>
     <string name="enteraddresserror">Enter delivery address</string>
+    <string name="topic">Topic</string>
+    <string name="description">Description</string>
+    <string name="submit">Submit</string>
+    <string name="chat_agent">Agent</string>
+    <string name="rating">Rating</string>
+    <string name="order_id">Order ID :</string>
 
 </resources>

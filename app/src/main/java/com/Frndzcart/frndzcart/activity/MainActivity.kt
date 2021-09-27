@@ -20,15 +20,14 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.Frndzcart.frndzcart.Global.Global
-import com.Frndzcart.frndzcart.fragment.HomeFragment
 import com.Frndzcart.frndzcart.R
 import com.Frndzcart.frndzcart.`interface`.DrawerLock
 import com.Frndzcart.frndzcart.databinding.ActivityMainBinding
-import com.Frndzcart.frndzcart.fragment.Cartfragment
 import com.Frndzcart.frndzcart.`interface`.counter
 import com.Frndzcart.frndzcart.`interface`.setvisibility
-import com.Frndzcart.frndzcart.fragment.OrderFragment
+import com.Frndzcart.frndzcart.fragment.*
 import com.google.android.material.navigation.NavigationView
 import java.util.*
 
@@ -49,18 +48,19 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        binding.search.isVisible = true
-        binding.microphone.isVisible = true
+       /* binding.search.isVisible = true
+        binding.microphone.isVisible = true*/
 
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.open, R.string.close)
-
+        binding.heading.text = Global.name
         binding.drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
         binding.microphone.setOnClickListener(View.OnClickListener {
             speechRecognizition()
         })
 
-        loadFragment(HomeFragment())
+//        loadFragment(HomeFragment())
+        callFragment(Add_Product_fragment())
 
 
     }
@@ -83,7 +83,16 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
 
 
     }
+    private fun callFragment(fragment: Fragment) {
+        if (Global.classname == fragment?.javaClass?.name)
+            return
 
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
@@ -96,6 +105,8 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
+        if (Global.classname == fragment?.javaClass?.name)
+            return false
         Global.hideKeybaord(binding.search,this)
         //switching fragment
         if (fragment != null) {
@@ -141,12 +152,17 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
             when (item.itemId) {
                 R.id.nav_home -> {
                     onCount(Global.cartList.size)
-                    loadFragment(HomeFragment())
+                    callFragment(Add_Product_fragment())
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                 }
 
                 R.id.orders ->{
                     loadFragment(OrderFragment())
+                    binding.countLayout.isVisible = false
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.help ->{
+                    loadFragment(FeedbackFragment())
                     binding.countLayout.isVisible = false
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                 }
