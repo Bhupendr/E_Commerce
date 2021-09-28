@@ -1,8 +1,6 @@
-package com.Frndzcart.frndzcart.fragment
+package com.Frndzcart.frndzcart.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +26,7 @@ class OrderAdapter(var arrayList: ArrayList<OrderData>): RecyclerView.Adapter<Or
         var listdata = arrayList[position]
 
         holder.title.text = Global.name
-        holder.orderid.text = listdata.order_id
+        holder.date_value.text = listdata.created_at
         holder.total_amount.text = listdata.total_amount
         holder.delivry_address.text = ": " +listdata.address
     }
@@ -41,7 +39,7 @@ class OrderAdapter(var arrayList: ArrayList<OrderData>): RecyclerView.Adapter<Or
 
 
         var title : TextView = itemView.findViewById(R.id.title)
-        var orderid : TextView = itemView.findViewById(R.id.orderid)
+        var date_value : TextView = itemView.findViewById(R.id.date_value)
         var total_amount : TextView = itemView.findViewById(R.id.total_amount)
         var delivry_address : TextView = itemView.findViewById(R.id.delivry_address)
 

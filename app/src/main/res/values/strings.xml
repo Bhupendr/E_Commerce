@@ -106,5 +106,6 @@
     <string name="chat_agent">Agent</string>
     <string name="rating">Rating</string>
     <string name="order_id">Order ID :</string>
+    <string name="date">Order Date</string>
 
 </resources>

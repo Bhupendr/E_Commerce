@@ -1,3 +1,7 @@
 package com.Frndzcart.frndzcart.model
 
-class ProductResponse : ArrayList<ProductResponseItem>()
+data class ProductResponse(
+        val `data`: List<ProductResponseItem>,
+        val message: String,
+        val status: String
+)

@@ -56,7 +56,7 @@ binding.back.setOnClickListener {
     }
 
     private fun callApi(address: Editable?, productidlist: String) {
-        val call = ApiClient().service.order("sales/apis/order.php?o=%7B\"customer_id\":"+ Global.customerid +"," +
+        val call = ApiClient().service.order("admin/apis/order.php?o=%7B\"customer_id\":"+ Global.customerid +"," +
                 "\"total_amount\":"+ Global.pricing.toString() +",\"items\"" +
                 ":\""+ productidlist +"\",\"address\":\"" + address + "\"%7D")
         call.enqueue(object : Callback<String> {

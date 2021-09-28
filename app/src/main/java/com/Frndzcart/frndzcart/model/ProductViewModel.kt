@@ -31,21 +31,21 @@ class ProductViewModel : ViewModel() {
 
     private fun loadOpportunies(progressBar: ProgressBar) {
         val call = ApiClient().service.getProductList()
-        call.enqueue(object : Callback<List<ProductResponseItem>> {
+        call.enqueue(object : Callback<ProductResponse> {
             override fun onResponse(
-                call: Call<List<ProductResponseItem>>,
-                response: Response<List<ProductResponseItem>>
+                call: Call<ProductResponse>,
+                response: Response<ProductResponse>
             ) {
                 progressBar.isVisible = false
                 if(response.body() != null) {
-                    productList!!.value = response.body()
+                    productList!!.value = response.body()?.data
                 }
                 Log.e("ok",response.message())
                 Log.e("data", response.body().toString())
 
             }
 
-            override fun onFailure(call: Call<List<ProductResponseItem>>, t: Throwable) {
+            override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
                 Log.e("fail", t.message.toString())
                 progressBar.isVisible = false
             }

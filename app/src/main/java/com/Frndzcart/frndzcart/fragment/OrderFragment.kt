@@ -1,6 +1,5 @@
 package com.Frndzcart.frndzcart.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.frndzcart.Global.Global
 import com.Frndzcart.frndzcart.R
-import com.Frndzcart.frndzcart.activity.MainActivity
+import com.Frndzcart.frndzcart.adapter.OrderAdapter
 import com.Frndzcart.frndzcart.api.ApiClient
 import com.Frndzcart.frndzcart.databinding.FragmentOrderBinding
-import com.Frndzcart.frndzcart.model.LoginResponse
 import com.Frndzcart.frndzcart.model.OrderData
 import com.Frndzcart.frndzcart.model.OrderResponse
 import retrofit2.Call

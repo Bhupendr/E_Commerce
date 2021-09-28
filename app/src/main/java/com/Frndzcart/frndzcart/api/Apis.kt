@@ -14,8 +14,8 @@ import retrofit2.http.Url
 interface Apis {
 
 
-    @GET("sales/apis/products.php")
-    fun getProductList():Call<List<ProductResponseItem>>
+    @GET("admin/apis/products.php")
+    fun getProductList():Call<ProductResponse>
 
 
     @GET

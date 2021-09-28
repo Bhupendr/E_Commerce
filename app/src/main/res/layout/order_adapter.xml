@@ -56,7 +56,7 @@
                     android:id="@+id/orderid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/order_id"
+                    android:text="@string/date"
                     android:textSize="@dimen/text_size_16"
                     android:textColor="@color/black"
                     android:fontFamily="@font/muli_regular"/>

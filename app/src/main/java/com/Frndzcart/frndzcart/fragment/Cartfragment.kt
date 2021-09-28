@@ -36,7 +36,7 @@ class Cartfragment : Fragment(), setvisibility,View.OnClickListener {
         binding.back.setOnClickListener(this)
         binding.itemEmptyLayout.backPress.setOnClickListener(this)
         binding.proceed.setOnClickListener(this)
-
+        Global.classname = javaClass.name
         setAdapter()
         return binding.root
     }
