@@ -16,8 +16,13 @@
             android:title="Orders" />
 
         <item
-            android:id="@+id/help"
+            android:id="@+id/feedback"
             android:icon="@drawable/ic_baseline_help_outline_24"
+            android:title="Feedback" />
+
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/ic_baseline_phone"
             android:title="Help" />
 
 
