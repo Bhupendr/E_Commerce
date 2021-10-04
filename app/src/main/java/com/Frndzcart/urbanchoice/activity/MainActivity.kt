@@ -12,6 +12,7 @@ import android.speech.RecognizerIntent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,9 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
             R.string.close
         )
         binding.heading.text = Global.name
+        val headerview : View = binding.navView.getHeaderView(0)
+        val headerText : TextView = headerview.findViewById(R.id.header_title)
+        headerText.text = Global.name
         binding.drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
         binding.microphone.setOnClickListener(View.OnClickListener {
@@ -176,11 +180,11 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
                         packageManager.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
                         val i = Intent(Intent.ACTION_VIEW)
                         i.data = Uri.parse(url)
-                        startActivity(i)
+                        startActivity(Intent.createChooser(i,""))
                     } catch (e: PackageManager.NameNotFoundException) {
                         val intent = Intent(Intent.ACTION_DIAL)
                         intent.data = Uri.parse(phoneNumber)
-                        startActivity(intent)
+                        startActivity(Intent.createChooser(intent,""))
                         e.printStackTrace()
                     }
                 }

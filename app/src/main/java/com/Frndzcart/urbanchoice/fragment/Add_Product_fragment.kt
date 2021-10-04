@@ -81,7 +81,7 @@ class Add_Product_fragment : Fragment() {
                 arrayList.clear()
                 arrayList.addAll(it)
                 recyclerView.layoutManager = linearLayoutManager
-                adapter = ProductAdapter(arrayList)
+                adapter = ProductAdapter(arrayList,requireContext())
                 recyclerView.adapter = adapter
                 adapter.notifyDataSetChanged()
             })

@@ -3,6 +3,7 @@ package com.Frndzcart.urbanchoice.adapter
 import android.content.Context
 import android.graphics.Paint
 import android.os.Vibrator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +16,22 @@ import com.Frndzcart.urbanchoice.Global.Global
 import com.Frndzcart.urbanchoice.R
 import com.Frndzcart.urbanchoice.model.ProductResponseItem
 import com.Frndzcart.urbanchoice.`interface`.counter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 
-class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerView.Adapter<ProductAdapter.Category_Holder>()  {
-    private var context: Context? = null
+class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>()  {
+    lateinit var context : Context
     lateinit var vibe : Vibrator
     lateinit var count : counter
+    var arrayList =  ArrayList<ProductResponseItem>()
+    constructor(arrayList: ArrayList<ProductResponseItem>, context: Context) : this() {
+        this.arrayList = arrayList
+        this.context = context
+    }
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Category_Holder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -29,7 +40,7 @@ class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerVi
             false
         )
 
-        context = parent.context
+
         count = parent.context as counter
         vibe = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
@@ -54,6 +65,17 @@ class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerVi
         holder.item_price.text = "Rs." + listdata.mrp
         holder.discounted_price.text = "Rs." + listdata.price
         holder.total.text = listdata.quantity.toString()
+        val url = Global.BASE_URL +"admin/icon_file/"+listdata.icon_file
+        Log.e("url", url)
+        Glide.with(context).load(url)
+
+            .into(holder.item_image)
+/*
+          .placeholder(R.drawable.ic_baseline_camera_alt_24) //5
+            .error(R.drawable.ic_baseline_broken_image_24) //6
+            .fallback(R.drawable.ic_baseline_camera_alt_24)
+            .dontAnimate()   */
+
         val marginpprice = listdata.mrp.toInt() - listdata.price.toInt()
 
         holder.offer_percent.text = "Rs " + marginpprice.toString() +  " save"
@@ -163,6 +185,7 @@ class ProductAdapter(var arrayList: ArrayList<ProductResponseItem>) : RecyclerVi
         var red_offer_img : ImageView = itemView.findViewById(R.id.red_offer_img)
         var item_name : TextView = itemView.findViewById(R.id.item_name)
         var item_price : TextView = itemView.findViewById(R.id.item_price)
+        var item_image : ImageView = itemView.findViewById(R.id.item_image)
         var discounted_price : TextView = itemView.findViewById(R.id.discounted_price)
 
         var offer_percent : TextView = itemView.findViewById(R.id.offer_percent)
