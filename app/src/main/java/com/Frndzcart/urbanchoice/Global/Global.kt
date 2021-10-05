@@ -13,6 +13,7 @@ object Global {
 
 //    const val BASE_URL = "https://www.mdsys.in/"
     const val BASE_URL = "https://urbanchoice.co/"
+    const val BASE_Image_URL ="http://urbanchoice.co/"
      var customerid = "0"
      var phonenum = "0"
      var name = "0"

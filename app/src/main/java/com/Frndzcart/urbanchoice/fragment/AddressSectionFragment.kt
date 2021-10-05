@@ -57,7 +57,7 @@ binding.back.setOnClickListener {
 
 private fun setOrder():String{
     var result = ""
-    for(i in 0..Global.cartList.size){
+    for(i in 0 until Global.cartList.size){
         if(i==0){
             result=Global.cartList.get(i)!!.id + ":" + Global.cartList.get(i)!!.quantity
         }else{
@@ -72,6 +72,8 @@ private fun setOrder():String{
         binding.totalcost.text = Global.pricing.toString()
         binding.nameValue.setText(Prefs.getString(Global.Username,""))
         binding.phoneValue.setText(Prefs.getString(Global.mobilenumber,""))
+        binding.emailValue.setText(Prefs.getString(Global.email,""))
+        binding.address.setText(Prefs.getString(Global.address,""))
     }
 
     private fun callApi(address: Editable?, productidlist: String) {

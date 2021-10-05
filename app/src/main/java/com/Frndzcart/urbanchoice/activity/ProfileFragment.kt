@@ -44,9 +44,10 @@ class ProfileFragment : Fragment() {
         binding.logout.setOnClickListener{
 
             Prefs.clear()
-            val intent = Intent(context,SplashActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            val intent = Intent(context,LogInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            (activity as AppCompatActivity).finish()
 
         }
 

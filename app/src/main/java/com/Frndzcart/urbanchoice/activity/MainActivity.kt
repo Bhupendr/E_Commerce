@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         setSupportActionBar(binding.toolbar)
        /* binding.search.isVisible = true
         binding.microphone.isVisible = true*/
-
+        callFragment(Add_Product_fragment())
         toggle = ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         val profile : ImageView = headerview.findViewById(R.id.profile)
         headerText.text = Prefs.getString(Global.Username,"")
         binding.heading.text = "Home"
-        callFragment(Add_Product_fragment())
+
         binding.drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
         binding.microphone.setOnClickListener(View.OnClickListener {
@@ -199,6 +199,8 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
                         startActivity(Intent.createChooser(intent,""))
                         e.printStackTrace()
                     }
+
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
                 }
 
             }

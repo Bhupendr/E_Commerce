@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.urbanchoice.Global.Global
 import com.Frndzcart.urbanchoice.R
 import com.Frndzcart.urbanchoice.model.OrderData
+import com.pixplicity.easyprefs.library.Prefs
 
 class OrderAdapter(var arrayList: ArrayList<OrderData>): RecyclerView.Adapter<OrderAdapter.Category_Holder>()   {
 
@@ -25,7 +26,7 @@ class OrderAdapter(var arrayList: ArrayList<OrderData>): RecyclerView.Adapter<Or
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
         var listdata = arrayList[position]
 
-        holder.title.text = Global.name
+        holder.title.text = Prefs.getString(Global.Username,"")
         holder.date_value.text = listdata.created_at
         holder.total_amount.text = listdata.total_amount
         holder.delivry_address.text = ": " +listdata.address

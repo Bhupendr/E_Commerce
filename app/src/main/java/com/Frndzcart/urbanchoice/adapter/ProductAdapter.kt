@@ -65,11 +65,9 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
         holder.item_price.text = "Rs." + listdata.mrp
         holder.discounted_price.text = "Rs." + listdata.price
         holder.total.text = listdata.quantity.toString()
-        val url = Global.BASE_URL +"admin/icon_file/"+listdata.icon_file
+        val url = Global.BASE_Image_URL +"admin/icon_file/"+listdata.icon_file
         Log.e("url", url)
-        Glide.with(context).load(url)
-
-            .into(holder.item_image)
+        Glide.with(context).load(url).into(holder.item_image)
 /*
           .placeholder(R.drawable.ic_baseline_camera_alt_24) //5
             .error(R.drawable.ic_baseline_broken_image_24) //6

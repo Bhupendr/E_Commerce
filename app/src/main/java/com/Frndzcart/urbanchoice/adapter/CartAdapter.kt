@@ -3,6 +3,7 @@ package com.Frndzcart.urbanchoice.adapter
 import android.content.Context
 import android.graphics.Paint
 import android.os.Vibrator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.Frndzcart.urbanchoice.databinding.ProductItemViewBinding
 import com.Frndzcart.urbanchoice.fragment.Cartfragment
 import com.Frndzcart.urbanchoice.`interface`.counter
 import com.Frndzcart.urbanchoice.`interface`.setvisibility
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.product_item_view.view.*
 
 class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
@@ -80,6 +82,9 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                     itemView.total.text = listdata.quantity.toString()
 
                 })
+            val url = Global.BASE_Image_URL +"admin/icon_file/"+listdata.icon_file
+
+            context?.let { Glide.with(it).load(url).into(itemView.item_image) }
 
                 itemView.plus.setOnClickListener(View.OnClickListener {
 
@@ -109,6 +114,8 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
         textView.text = "Rs: ${Global.pricing}"
 
     }
-   inner class Category_Holder(val itemView:  ProductItemViewBinding) : RecyclerView.ViewHolder(itemView.root)
+   inner class Category_Holder(val itemView:  ProductItemViewBinding) : RecyclerView.ViewHolder(itemView.root) {
+
+   }
 
 }

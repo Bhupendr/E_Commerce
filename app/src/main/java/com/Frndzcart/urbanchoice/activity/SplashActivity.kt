@@ -2,7 +2,6 @@ package com.Frndzcart.urbanchoice.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -20,21 +19,10 @@ class SplashActivity : AppCompatActivity() {
         this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
+
         )
         setContentView(R.layout.splash_screen)
-        val sp1 = getSharedPreferences("Login", MODE_PRIVATE)
-
-       /* if(sp1!=null){
-            val unm = sp1.getString("Unm", null)
-            val pass = sp1.getString("Psw", null)
-            val autologin = sp1.getBoolean("relogin", false)
-
-            if(autologin){
-                val act = LogInActivity()
-                act.LogIn(unm!!,pass!!)
-            }
-
-        }*/
+        Global.classname = "";
         val motionLayout: MotionLayout = findViewById(R.id.motion_layout)
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(motionLayout: MotionLayout, startId: Int, endId: Int) {}
@@ -42,14 +30,14 @@ class SplashActivity : AppCompatActivity() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
 
                 if(Prefs.getBoolean(Global.autoLogin,false)){
-                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+
                 }else {
-                    val intent = Intent(this@SplashActivity, LogInActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this@SplashActivity, LogInActivity::class.java))
 
                 }
                 finish()
+
             }
             override fun onTransitionTrigger(
                 motionLayout: MotionLayout,
