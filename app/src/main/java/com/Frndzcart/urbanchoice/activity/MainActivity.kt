@@ -12,6 +12,7 @@ import android.speech.RecognizerIntent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -27,6 +28,7 @@ import com.Frndzcart.urbanchoice.`interface`.counter
 import com.Frndzcart.urbanchoice.databinding.ActivityMainBinding
 import com.Frndzcart.urbanchoice.fragment.*
 import com.google.android.material.navigation.NavigationView
+import com.pixplicity.easyprefs.library.Prefs
 import java.util.*
 
 class MainActivity : AppCompatActivity(), counter,DrawerLock {
@@ -59,15 +61,23 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         binding.heading.text = Global.name
         val headerview : View = binding.navView.getHeaderView(0)
         val headerText : TextView = headerview.findViewById(R.id.header_title)
-        headerText.text = Global.name
+        val profile : ImageView = headerview.findViewById(R.id.profile)
+        headerText.text = Prefs.getString(Global.Username,"")
+        binding.heading.text = "Home"
+        callFragment(Add_Product_fragment())
         binding.drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
         binding.microphone.setOnClickListener(View.OnClickListener {
             speechRecognizition()
         })
 
+
+        profile.setOnClickListener {
+            loadFragment(ProfileFragment())
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
 //        loadFragment(HomeFragment())
-        callFragment(Add_Product_fragment())
+
 
 
     }
@@ -156,7 +166,9 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
     override fun onResume() {
         super.onResume()
         binding.navView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+            binding.heading.text = item.title.toString()
             when (item.itemId) {
+
                 R.id.nav_home -> {
                     onCount(Global.cartList.size)
                     callFragment(Add_Product_fragment())

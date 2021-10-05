@@ -19,6 +19,13 @@ object Global {
     var pricing : Double = 0.00
     var classname =""
 
+    const val Username = "_Username"
+    const val mobilenumber = "_mobilenumber"
+    const val email = "_email"
+    const val address = "_address"
+    const val userID = "_userID"
+    const val autoLogin = "_autoLogin"
+
 
     fun hideKeybaord(v: View, context: Context) {
         val inputMethodManager =

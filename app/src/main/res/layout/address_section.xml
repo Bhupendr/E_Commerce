@@ -128,6 +128,8 @@
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/black"
             app:hintAnimationEnabled="true"
+            android:clickable="false"
+            android:focusable="false"
             android:layout_marginTop="@dimen/size_20"
             android:hint="@string/mobile_no">
 
@@ -136,6 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
+                android:clickable="false"
+                android:focusable="false"
                 android:textColor="@color/black"
                 android:fontFamily="@font/muli_regular"
                 android:textSize="@dimen/text_size_16"

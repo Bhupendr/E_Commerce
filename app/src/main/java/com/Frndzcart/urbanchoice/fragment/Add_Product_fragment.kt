@@ -50,8 +50,8 @@ class Add_Product_fragment : Fragment() {
         cart.setBackgroundResource(R.drawable.ic_shopping_cart)
       /*  search.isVisible = true
         microphone.isVisible = true*/
-        /*val heading : TextView = activity?.findViewById(R.id.heading) as TextView
-        heading.text = "Add Product"*/
+        val heading : TextView = activity?.findViewById(R.id.heading) as TextView
+        heading.text = "Home"
 
         cart.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()

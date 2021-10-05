@@ -15,6 +15,8 @@ import com.Frndzcart.urbanchoice.R
 import com.Frndzcart.urbanchoice.activity.MainActivity
 import com.Frndzcart.urbanchoice.api.ApiClient
 import com.Frndzcart.urbanchoice.databinding.AddressSectionBinding
+import com.Frndzcart.urbanchoice.model.ProductResponseItem
+import com.pixplicity.easyprefs.library.Prefs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,10 +40,14 @@ binding.back.setOnClickListener {
         binding.proceed.setOnClickListener{
             if(validation(binding.nameValue.text,binding.phoneValue.text,binding.emailValue.text,binding.address.text))
             {
+                Prefs.putString(Global.email,binding.emailValue.text.toString())
+                Prefs.putString(Global.name,binding.nameValue.text.toString())
+                Prefs.putString(Global.address,binding.address.text.toString())
                 if(Global.checkInternet(context)){
                     val productidlist = Global.cartList.joinToString { "${it?.id}" }
+
                   //  val productid = productidlist.replace("\\s".toRegex(), "")
-                    callApi(binding.address.text,productidlist)
+                    callApi(binding.address.text,setOrder())
                 }
             }
         }
@@ -49,13 +55,27 @@ binding.back.setOnClickListener {
         return binding.root
     }
 
+private fun setOrder():String{
+    var result = ""
+    for(i in 0..Global.cartList.size){
+        if(i==0){
+            result=Global.cartList.get(i)!!.id + ":" + Global.cartList.get(i)!!.quantity
+        }else{
+            result=result + "," +Global.cartList.get(i)!!.id + ":" + Global.cartList.get(i)!!.quantity
+        }
+
+    }
+    return result
+}
+
     private fun setData() {
         binding.totalcost.text = Global.pricing.toString()
-        binding.nameValue.setText(Global.name)
-        binding.phoneValue.setText(Global.phonenum)
+        binding.nameValue.setText(Prefs.getString(Global.Username,""))
+        binding.phoneValue.setText(Prefs.getString(Global.mobilenumber,""))
     }
 
     private fun callApi(address: Editable?, productidlist: String) {
+
         val call = ApiClient().service.order("admin/apis/order.php?o=%7B\"customer_id\":"+ Global.customerid +"," +
                 "\"total_amount\":"+ Global.pricing.toString() +",\"items\"" +
                 ":\""+ productidlist +"\",\"address\":\"" + address + "\"%7D")
