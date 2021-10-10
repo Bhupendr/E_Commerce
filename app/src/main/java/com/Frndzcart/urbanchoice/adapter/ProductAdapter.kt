@@ -35,7 +35,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Category_Holder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.product_item_view,
+            R.layout.product_item_newscreen,
             parent,
             false
         )
@@ -190,8 +190,8 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
         var weight : TextView = itemView.findViewById(R.id.weight)
 
         var add : TextView = itemView.findViewById(R.id.add)
-        var minus : TextView = itemView.findViewById(R.id.minus)
-        var plus : TextView = itemView.findViewById(R.id.plus)
+        var minus : LinearLayout = itemView.findViewById(R.id.minus)
+        var plus : LinearLayout = itemView.findViewById(R.id.plus)
         var total : TextView = itemView.findViewById(R.id.total)
         var add_quantity : LinearLayout = itemView.findViewById(R.id.add_quantity)
         var add_new_item : LinearLayout = itemView.findViewById(R.id.add_new_item)

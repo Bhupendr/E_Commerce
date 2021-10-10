@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.urbanchoice.Global.Global
@@ -23,7 +24,7 @@ import com.Frndzcart.urbanchoice.model.ProductViewModel
 class Add_Product_fragment : Fragment() {
 
     lateinit var adapter: ProductAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var linearLayoutManager: GridLayoutManager
     private lateinit var root: View
     private lateinit var  recyclerView : RecyclerView
     val arrayList = ArrayList<ProductResponseItem>()
@@ -41,7 +42,7 @@ class Add_Product_fragment : Fragment() {
             activity?.onBackPressed()
         }*/
         recyclerView  = root.findViewById(R.id.product_recycler_view)
-        linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        linearLayoutManager = GridLayoutManager(context,2)
         val microphone : ImageView  = activity?.findViewById(R.id.microphone)!!
         val search : SearchView = activity?.findViewById(R.id.search)!!
         val progressBar : ProgressBar = root.findViewById(R.id.progressBar)
