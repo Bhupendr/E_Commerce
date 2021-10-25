@@ -30,7 +30,7 @@ class LogInActivity : AppCompatActivity() {
 
         binding.login.setOnClickListener{
             if(validation(binding.username.text, binding.mobilenum.text)){
-
+                binding.login.startLoading()
                 LogIn(binding.username.text.toString(), binding.mobilenum.text.toString())
             }
 
@@ -62,6 +62,7 @@ class LogInActivity : AppCompatActivity() {
             ) {
                 if (response.body() != null) {
                     // productList!!.value = response.body()?.data
+                    binding.login.loadingSuccessful()
                     Global.customerid = response.body()!!.id
 
 
@@ -70,8 +71,12 @@ class LogInActivity : AppCompatActivity() {
                     Prefs.putString(Global.userID, response.body()!!.id)
                     Prefs.putBoolean(Global.autoLogin,true)
 //                        val intent
+
                     startActivity(Intent(this@LogInActivity, MainActivity::class.java))
-                    finish()
+
+//                    finish()
+                }else{
+                    binding.login.loadingFailed()
                 }
                 Log.e("ResultMsz=?", response.body().toString())
 

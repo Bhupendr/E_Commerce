@@ -217,8 +217,10 @@
                     android:layout_marginTop="@dimen/size_40"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/log_out"
+                    android:textSize="@dimen/text_size_16"
                     android:textColor="@color/white"
                     android:drawableLeft="@drawable/ic_logout"
+                    android:background="@drawable/buttonclickeffect"
                     android:drawableTint="@color/white"
                     android:textAllCaps="false"/>
 
