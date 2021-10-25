@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
         )
         setContentView(R.layout.splash_screen)
-        Global.classname = "";
+        Global.classname = javaClass.name
         val motionLayout: MotionLayout = findViewById(R.id.motion_layout)
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(motionLayout: MotionLayout, startId: Int, endId: Int) {}
@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
                     startActivity(Intent(this@SplashActivity, LogInActivity::class.java))
 
                 }
-                finish()
+
 
             }
             override fun onTransitionTrigger(

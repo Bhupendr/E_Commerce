@@ -25,19 +25,7 @@ class LogInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LoginPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val sp1 = getSharedPreferences("Login", MODE_PRIVATE)
 
-        if(sp1!=null){
-            val unm = sp1.getString("Unm", null)
-            val pass = sp1.getString("Psw", null)
-            val autologin = sp1.getBoolean("relogin", false)
-            binding.username.setText(unm)
-            binding.mobilenum.setText(pass)
-            if(autologin){
-                LogIn(unm!!,pass!!)
-            }
-
-        }
 
 
         binding.login.setOnClickListener{
@@ -75,15 +63,8 @@ class LogInActivity : AppCompatActivity() {
                 if (response.body() != null) {
                     // productList!!.value = response.body()?.data
                     Global.customerid = response.body()!!.id
-                    Global.name = response.body()!!.name
-                    Global.phonenum = mobile
 
-                    /*val sp = getSharedPreferences("Login", MODE_PRIVATE)
-                    val Ed = sp.edit()
-                    Ed.putString("Unm", username)
-                    Ed.putString("Psw", mobile)
-                    Ed.putBoolean("relogin", true)
-                    Ed.apply()*/
+
                     Prefs.putString(Global.Username, response.body()!!.name)
                     Prefs.putString(Global.mobilenumber, response.body()!!.phone)
                     Prefs.putString(Global.userID, response.body()!!.id)

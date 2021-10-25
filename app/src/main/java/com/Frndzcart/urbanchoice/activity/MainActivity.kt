@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         )
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Global.classname = javaClass.name
         setSupportActionBar(binding.toolbar)
        /* binding.search.isVisible = true
         binding.microphone.isVisible = true*/
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
             R.string.open,
             R.string.close
         )
-        binding.heading.text = Global.name
+        binding.heading.text = Prefs.getString(Global.Username,"")
         val headerview : View = binding.navView.getHeaderView(0)
         val headerText : TextView = headerview.findViewById(R.id.header_title)
         val profile : ImageView = headerview.findViewById(R.id.profile)
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
 
     }
     private fun callFragment(fragment: Fragment) {
-        if (Global.classname == fragment?.javaClass?.name)
+        if (Global.classname == fragment.javaClass.name)
             return
 
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)

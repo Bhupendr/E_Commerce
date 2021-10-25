@@ -33,6 +33,9 @@
         <activity android:name=".activity.LogInActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".activity.OrderDetails"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

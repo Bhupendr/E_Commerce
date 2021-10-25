@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         cart.isVisible = true
 
         val heading : TextView = activity?.findViewById(R.id.heading) as TextView
-        heading.text = Global.name
+
 
         val imagelist = arrayListOf<Image_Slider_model>(
                 Image_Slider_model(R.drawable.banner),
