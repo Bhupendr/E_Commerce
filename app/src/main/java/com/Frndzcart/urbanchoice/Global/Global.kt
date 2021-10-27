@@ -1,10 +1,19 @@
 package com.Frndzcart.urbanchoice.Global
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.view.Gravity
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.Toast
+import com.Frndzcart.urbanchoice.R
 import com.Frndzcart.urbanchoice.model.ProductResponseItem
 import java.text.DateFormat
 import java.text.ParseException
@@ -81,6 +90,37 @@ object Global {
     }
 
 
+    fun noInternetdialog(context: Context)
+    {
+//        val dialogbinding = DeliveryDetailsBinding.inflate(layoutInflater)
+        val dialog = Dialog(context, R.style.Theme_Dialog)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.no_internet_connection)
+        dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(Color.TRANSPARENT)
+        )
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT
+        lp.gravity = Gravity.CENTER
+        val try_again : Button = dialog.findViewById(R.id.try_again)
 
+        try_again.setOnClickListener {
+            if(checkInternet(context)){
+                dialog.dismiss()
+            }else{
+                Toast.makeText(context,context.resources.getString(R.string.check_internet), Toast.LENGTH_LONG).show()
+
+            }
+
+        }
+
+
+        dialog.window!!.attributes = lp
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.show()
+    }
 
 }

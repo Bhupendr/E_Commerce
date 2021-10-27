@@ -114,5 +114,10 @@
     <string name="itemprice">Item Price</string>
     <string name="order_time">Order Time</string>
     <string name="select_payment">Select Payment method</string>
+    <string name="check_internet">Check Internet Connection</string>
+    <string name="try_again">Try again</string>
+    <string name="noInternet">No Internet Connection</string>
+    <string name="email_mobile">Email/Mobile</string>
+    <string name="rupees">Rs : %s</string>
 
 </resources>

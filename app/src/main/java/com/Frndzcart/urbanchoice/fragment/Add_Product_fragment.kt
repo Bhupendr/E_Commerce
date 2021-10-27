@@ -64,6 +64,10 @@ class Add_Product_fragment : Fragment() {
         progressBar.isVisible = true
         if(Global.checkInternet(context)){
             callApi(progressBar)
+        }else{
+            progressBar.visibility = View.GONE
+//            Toast.makeText(context,resources.getString(R.string.check_internet), Toast.LENGTH_LONG).show()
+            Global.noInternetdialog(requireContext())
         }
 
         return root

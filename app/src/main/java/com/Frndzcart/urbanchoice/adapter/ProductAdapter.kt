@@ -42,7 +42,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
 
 
         count = parent.context as counter
-        vibe = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vibe = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         return Category_Holder(view)
     }
@@ -55,24 +55,25 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
 
 
-        var listdata = arrayList[position]
+        val listdata = arrayList[position]
         if(checkItemInCart(listdata)){
             holder.add_quantity.isVisible = true
             holder.add_new_item.isVisible = false
             holder.total.text = listdata.quantity.toString()
         }
         holder.item_name.text = listdata.title
-        holder.item_price.text = "Rs." + listdata.mrp
-        holder.discounted_price.text = "Rs." + listdata.price
+
+        holder.item_price.text = context.resources.getString(R.string.rupees,listdata.mrp)
+        holder.discounted_price.text = context.resources.getString(R.string.rupees,listdata.price)
         holder.total.text = listdata.quantity.toString()
         val url = Global.BASE_Image_URL +"admin/icon_file/"+listdata.icon_file
         Log.e("url", url)
-        Glide.with(context).load(url).into(holder.item_image)
-/*
-          .placeholder(R.drawable.ic_baseline_camera_alt_24) //5
+        Glide.with(context).load(url)
+          .placeholder(R.drawable.launchericon) //5
             .error(R.drawable.ic_baseline_broken_image_24) //6
-            .fallback(R.drawable.ic_baseline_camera_alt_24)
-            .dontAnimate()   */
+            .fallback(R.drawable.launchericon)
+            .dontAnimate()
+            .into(holder.item_image)
 
         val marginpprice = listdata.mrp.toInt() - listdata.price.toInt()
 
@@ -101,20 +102,20 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
 
         })
 
-        holder.plus.setOnClickListener(View.OnClickListener {
+        holder.plus.setOnClickListener {
             listdata.quantity++
             holder.total.text = listdata.quantity.toString()
             addquantitytolist(listdata)
 
-        })
+        }
 
-        holder.minus.setOnClickListener(View.OnClickListener {
+        holder.minus.setOnClickListener {
 
-            if(listdata.quantity>1){
+            if (listdata.quantity > 1) {
                 listdata.quantity--
                 holder.total.text = listdata.quantity.toString()
                 addquantitytolist(listdata)
-            }else{
+            } else {
                 holder.add_quantity.isVisible = false
                 holder.add_new_item.isVisible = true
                 Global.cartList.remove(listdata)
@@ -123,7 +124,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
             }
             count.onCount(Global.cartList.size)
             // notifyDataSetChanged()
-        })
+        }
 
     }
 
@@ -162,7 +163,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
 
     private fun addtolist(listdata: ProductResponseItem): Boolean {
         for (im: ProductResponseItem? in Global.cartList){
-            if(im!!.id.equals(listdata.id)){
+            if(im!!.id == listdata.id){
 
                 im.quantity = im.quantity + listdata.quantity
 

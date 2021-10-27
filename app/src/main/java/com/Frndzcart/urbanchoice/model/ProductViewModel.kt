@@ -40,7 +40,7 @@ class ProductViewModel : ViewModel() {
                 if(response.body() != null) {
                     productList!!.value = response.body()?.data
                 }
-                Log.e("ok",response.message())
+
                 Log.e("data", response.body().toString())
 
             }

@@ -59,17 +59,19 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.Category_Holder>()  {
                 itemView.add_quantity.isVisible = true
                 itemView.add_new_item.isVisible = false
                 itemView.item_name.text = listdata?.title
-                itemView.item_price.text = listdata?.mrp
+                itemView.item_price.text = context!!.resources.getString(R.string.rupees,listdata?.mrp)
             Global.pricing = Global.cartList.sumBy {( it!!.quantity * it.price.toDouble()).toInt() }.toDouble()
 
-                itemView.discounted_price.text = listdata?.price
+                itemView.discounted_price.text = context!!.resources.getString(R.string.rupees,listdata?.price)
             val marginpprice = listdata!!.mrp.toInt() - listdata.price.toInt()
                 itemView.offer_percent.text = "Rs " + marginpprice.toString() +  " save"
                 if(marginpprice ==0) {
                     itemView.red_offer_img.isVisible = false
+
                 }else{
 //                    itemView.item_price.strike = true
                     itemView.item_price.strike = true
+
                 }
 //                itemView.weight.text = listdata.weght
 

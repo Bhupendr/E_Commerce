@@ -90,7 +90,7 @@ binding.back.setOnClickListener {
 
         upiPayment  = UPIPayment.Builder()
             .with(requireActivity())
-            .setPayeeVpa("ps97585412071@ybl")
+            .setPayeeVpa("9198520532@ybl")
             .setPayeeName("Urbanchoice")
             .setPayeeMerchantCode(getRandomString(10))
             .setTransactionId(getRandomString(10))
@@ -98,6 +98,7 @@ binding.back.setOnClickListener {
             .setDescription("Raw Meat")
             .setAmount(Global.pricing.toString())
             .build()
+
 
         upiPayment.setPaymentStatusListener(this)
 
@@ -123,7 +124,15 @@ binding.back.setOnClickListener {
 }
 
     private fun setData() {
-        binding.totalcost.text = Global.pricing.toString()
+        var deliveryfees = 0.00
+        val subtotal = Global.pricing
+        if(subtotal<299){
+            deliveryfees = 20.00
+            Global.pricing +=deliveryfees
+        }
+        binding.totalcost.text = resources.getString(R.string.rupees,subtotal.toString())
+        binding.deliverycost.text= resources.getString(R.string.rupees,deliveryfees.toString())
+        binding.grandtotalcost.text = resources.getString(R.string.rupees,Global.pricing.toString())
         binding.nameValue.setText(Prefs.getString(Global.Username,""))
         binding.phoneValue.setText(Prefs.getString(Global.mobilenumber,""))
         binding.emailValue.setText(Prefs.getString(Global.email,""))
@@ -173,7 +182,7 @@ binding.back.setOnClickListener {
         }else  if(phone!!.isEmpty()|| phone.trim().length<8){
             binding.phoneValue.error = resources.getString(R.string.enterphoneerror)
             return false
-        }else  if(email!!.isEmpty()|| isValidEmail(email.toString().trim())){
+        }else  if(email!!.isEmpty()){
             binding.emailValue.error = resources.getString(R.string.enteremailerror)
             return false
         }else if(address!!.isEmpty()){

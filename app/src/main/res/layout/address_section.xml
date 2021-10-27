@@ -122,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/ic_baseline_smartphone_24"
-            app:startIconContentDescription="@string/username"
+            app:startIconContentDescription="@string/mobile_no"
             app:startIconTint="@color/colorPrimary"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:textColorHint="@color/black"
@@ -156,20 +156,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/ic_baseline_email_24"
-            app:startIconContentDescription="@string/username"
+            app:startIconContentDescription="@string/email"
             app:startIconTint="@color/colorPrimary"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/black"
             app:hintAnimationEnabled="true"
             android:layout_marginTop="@dimen/size_20"
-            android:hint="@string/email">
+            android:hint="@string/email_mobile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:fontFamily="@font/muli_regular"
                 android:textSize="@dimen/text_size_16"
@@ -266,7 +265,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_60"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/footer"
             android:layout_margin="@dimen/size_20"
@@ -277,49 +276,110 @@
             <LinearLayout
                 android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_60"
-                android:layout_marginBottom="@dimen/size_20"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_20"
+                android:orientation="vertical"
                 >
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="@dimen/size_20"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli_bold"
-                        android:text="Amount to be paid"
+                        android:fontFamily="@font/muli_regular"
+                        android:text="@string/sub_total"
                         android:textColor="@color/black"
-                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
                         android:textSize="@dimen/text_size_14" />
+
+                    <TextView
+                        android:id="@+id/totalcost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Rs_100"
+                        android:layout_marginRight="@dimen/size_10"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_size_16"
+                        android:fontFamily="@font/muli_regular"
+                        android:textColor="@color/colorPrimary"/>
 
 
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli_regular"
+                        android:text="@string/delivery_fee"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_size_14" />
+
+
+                    <TextView
+                        android:id="@+id/deliverycost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Rs_100"
+                        android:layout_marginRight="@dimen/size_10"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_size_16"
+                        android:fontFamily="@font/muli_regular"
+                        android:textColor="@color/colorPrimary"/>
+
+
+                </LinearLayout>
+
                 <View
-                    android:layout_width="@dimen/size_1"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/size_80"
-                    android:layout_marginTop="@dimen/size_5"
-                    android:layout_marginBottom="@dimen/size_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/size_10"
                     android:background="@color/grey"/>
 
-                <TextView
-                    android:id="@+id/totalcost"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Rs_100"
-                    android:layout_marginRight="@dimen/size_10"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:textSize="@dimen/text_size_16"
-                    android:fontFamily="@font/muli_bold"
-                    android:textColor="@color/colorPrimary"/>
+                    android:layout_marginTop="@dimen/size_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/order_total"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_size_14" />
+
+
+                    <TextView
+                        android:id="@+id/grandtotalcost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Rs_100"
+                        android:layout_marginRight="@dimen/size_10"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_size_16"
+                        android:fontFamily="@font/muli_bold"
+                        android:textColor="@color/colorPrimary"/>
+
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

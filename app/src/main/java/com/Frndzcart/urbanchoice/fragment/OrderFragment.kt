@@ -49,6 +49,10 @@ class OrderFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
         if(Global.checkInternet(context)){
             callApi()
+        }else{
+            binding.progressBar.visibility = View.GONE
+//            Toast.makeText(context,resources.getString(R.string.check_internet), Toast.LENGTH_LONG).show()
+            Global.noInternetdialog(requireContext())
         }
         return binding.root
     }
