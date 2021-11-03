@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Global.classname = javaClass.name
+        Global.customerid = Prefs.getString(Global.userID, "0")
         setSupportActionBar(binding.toolbar)
        /* binding.search.isVisible = true
         binding.microphone.isVisible = true*/

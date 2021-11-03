@@ -35,6 +35,7 @@ object Global {
     var pricing : Double = 0.00
     var classname =""
 
+    const val AppIntro = "_AppIntro"
     const val Username = "_Username"
     const val mobilenumber = "_mobilenumber"
     const val email = "_email"

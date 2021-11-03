@@ -170,6 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:inputType="textEmailAddress"
                 android:fontFamily="@font/muli_regular"
                 android:textSize="@dimen/text_size_16"
                 android:paddingLeft="@dimen/size_10"

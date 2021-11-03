@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.text.Editable
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.Frndzcart.urbanchoice.Global.Global
 import com.Frndzcart.urbanchoice.R
@@ -23,6 +25,11 @@ class LogInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         binding = LoginPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -63,13 +70,14 @@ class LogInActivity : AppCompatActivity() {
                 if (response.body() != null) {
                     // productList!!.value = response.body()?.data
                     binding.login.loadingSuccessful()
-                    Global.customerid = response.body()!!.id
 
 
                     Prefs.putString(Global.Username, response.body()!!.name)
                     Prefs.putString(Global.mobilenumber, response.body()!!.phone)
                     Prefs.putString(Global.userID, response.body()!!.id)
                     Prefs.putBoolean(Global.autoLogin,true)
+
+                    Global.customerid = Prefs.getString(Global.userID, response.body()!!.id)
 //                        val intent
 
                     startActivity(Intent(this@LogInActivity, MainActivity::class.java))

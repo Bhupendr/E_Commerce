@@ -1,5 +1,6 @@
 package com.Frndzcart.urbanchoice.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
@@ -28,14 +29,22 @@ class SplashActivity : AppCompatActivity() {
             override fun onTransitionStarted(motionLayout: MotionLayout, startId: Int, endId: Int) {}
             override fun onTransitionChange(motionLayout: MotionLayout, startId: Int, endId: Int, progress: Float) {}
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                val sharedPreference =  getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+                if(sharedPreference.getBoolean(Global.AppIntro,true)){
+                    startActivity(Intent(this@SplashActivity, MyCustomAppIntro::class.java))
 
-                if(Prefs.getBoolean(Global.autoLogin,false)){
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                }else{
+                    if(Prefs.getBoolean(Global.autoLogin,false)){
+                        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
 
-                }else {
-                    startActivity(Intent(this@SplashActivity, LogInActivity::class.java))
+                    }else {
+                        startActivity(Intent(this@SplashActivity, LogInActivity::class.java))
 
+                    }
                 }
+
+
+
 
 
             }

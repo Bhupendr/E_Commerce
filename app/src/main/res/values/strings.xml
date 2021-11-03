@@ -119,5 +119,7 @@
     <string name="noInternet">No Internet Connection</string>
     <string name="email_mobile">Email/Mobile</string>
     <string name="rupees">Rs : %s</string>
+    <string name="welcomemsz">Welcome to Urbachoice family</string>
+    <string name="okay">Ok</string>
 
 </resources>

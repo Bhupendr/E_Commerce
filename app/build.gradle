@@ -11,16 +11,16 @@ android {
     }
 }
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.Frndzcart.urbanchoice"
-//        minSdkVersion 21
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 3
-        versionName "1.0.2"
+        minSdkVersion 21
+//        minSdkVersion 16
+        targetSdkVersion 31
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,20 +52,28 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //Image slider library
     implementation 'com.github.smarteist:autoimageslider:1.3.9'
+    //Circle imageview library
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0-RC"
+
+    //Api retrofit library
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
+    //Image Loader library
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    //EasyPref library
     implementation 'com.pixplicity.easyprefs:EasyPrefs:1.10.0'
-
+    //UPI integration library
     implementation 'com.github.niraj-prajapati:UPIPayments:1.1.4'
-
-
+    //Loading button library
     implementation 'com.github.StevenDXC:DxLoadingButton:2.4'
+    //Intro Slider library
+    implementation 'com.github.AppIntro:AppIntro:6.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

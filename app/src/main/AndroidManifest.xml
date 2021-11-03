@@ -30,6 +30,9 @@
                 android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name=".activity.MyCustomAppIntro"
+            android:label="My Custom AppIntro"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.LogInActivity"
             android:screenOrientation="portrait">
         </activity>

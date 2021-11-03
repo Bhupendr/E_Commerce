@@ -1,10 +1,7 @@
 package com.Frndzcart.urbanchoice.api
 
 
-import com.Frndzcart.urbanchoice.model.LoginResponse
-import com.Frndzcart.urbanchoice.model.OrderResponse
-import com.Frndzcart.urbanchoice.model.ProductResponse
-import com.Frndzcart.urbanchoice.model.ProductResponseItem
+import com.Frndzcart.urbanchoice.model.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,5 +27,13 @@ interface Apis {
 
     @GET
     fun order(@Url url:String): Call<String>
+
+
+    @GET
+    fun feedback(@Url url:String): Call<String>
+
+
+    @GET
+    fun particularorder(@Url url:String): Call<ParticularOrderResponse>
 
 }

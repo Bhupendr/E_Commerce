@@ -1,13 +1,15 @@
 package com.Frndzcart.urbanchoice.fragment
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.util.Patterns
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -17,6 +19,11 @@ import com.Frndzcart.urbanchoice.R
 import com.Frndzcart.urbanchoice.activity.MainActivity
 import com.Frndzcart.urbanchoice.api.ApiClient
 import com.Frndzcart.urbanchoice.databinding.AddressSectionBinding
+import com.Frndzcart.urbanchoice.databinding.PaymentSucccesfulDialogBinding
+import com.Frndzcart.urbanchoice.model.CreateOrderResponse
+import com.Frndzcart.urbanchoice.model.Item
+import com.Frndzcart.urbanchoice.model.ProductResponseItem
+import com.google.gson.Gson
 import com.nandroidex.upipayments.listener.PaymentStatusListener
 import com.nandroidex.upipayments.models.TransactionDetails
 import com.nandroidex.upipayments.utils.UPIPayment
@@ -29,12 +36,17 @@ class AddressSectionFragment : Fragment(), PaymentStatusListener {
 
     lateinit var binding: AddressSectionBinding
     lateinit var upiPayment: UPIPayment
+    var deliveryfees = 0.00
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = AddressSectionBinding.inflate(layoutInflater)
+
+
+
+
         setData()
 
 
@@ -67,13 +79,41 @@ binding.back.setOnClickListener {
                 if(Global.checkInternet(context)){
                     val productidlist = Global.cartList.joinToString { "${it?.id}" }
 
-                  //  val productid = productidlist.replace("\\s".toRegex(), "")
-                    callApi(binding.address.text,setOrder())
+
+                    val createorder = CreateOrderResponse(
+                            customer_id = Global.customerid.toInt(),
+                            total_amount = Global.pricing.toInt(),
+                            deliveryfee = deliveryfees.toInt(),
+                            address = binding.address.text.toString(),
+                            items = addItemList()
+
+                    )
+                    val gson = Gson()
+                    val jsonTut: String = gson.toJson(createorder)
+                    //  val productid = productidlist.replace("\\s".toRegex(), "")
+                    callApi(binding.address.text,setOrder(),jsonTut)
                 }
             }
         }
 
         return binding.root
+    }
+
+    private fun addItemList(): List<Item> {
+        val itemList = ArrayList<Item>()
+        for(item : ProductResponseItem? in Global.cartList){
+            val itemvalue = Item(
+                id = item!!.id.toInt(),
+                name = item.title,
+                price = item.mrp.toInt(),
+                qty = item.quantity
+            )
+           /* val gson = Gson()
+            val jsonTut: String = gson.toJson(itemvalue) */
+         itemList.add(Item(item!!.id.toInt(),item.title,item.mrp.toInt(),item.quantity))
+
+        }
+        return itemList
     }
 
     private fun integratepaymentmethod() {
@@ -124,42 +164,43 @@ binding.back.setOnClickListener {
 }
 
     private fun setData() {
-        var deliveryfees = 0.00
-        val subtotal = Global.pricing
-        if(subtotal<299){
+
+
+
+        if(Global.pricing<299){
             deliveryfees = 20.00
-            Global.pricing +=deliveryfees
         }
-        binding.totalcost.text = resources.getString(R.string.rupees,subtotal.toString())
+        binding.totalcost.text = resources.getString(R.string.rupees,Global.pricing.toString())
         binding.deliverycost.text= resources.getString(R.string.rupees,deliveryfees.toString())
-        binding.grandtotalcost.text = resources.getString(R.string.rupees,Global.pricing.toString())
+        binding.grandtotalcost.text = resources.getString(R.string.rupees,(Global.pricing+deliveryfees).toString())
         binding.nameValue.setText(Prefs.getString(Global.Username,""))
         binding.phoneValue.setText(Prefs.getString(Global.mobilenumber,""))
         binding.emailValue.setText(Prefs.getString(Global.email,""))
         binding.address.setText(Prefs.getString(Global.address,""))
     }
 
-    private fun callApi(address: Editable?, productidlist: String) {
+    private fun callApi(address: Editable?, productidlist: String, jsonTut: String) {
 
-        val call = ApiClient().service.order("admin/apis/order.php?o=%7B\"customer_id\":"+ Global.customerid +"," +
+        /*val call = ApiClient().service.order("admin/apis/order.php?o=%7B\"customer_id\":"+ Global.customerid +"," +
                 "\"total_amount\":"+ Global.pricing.toString() +",\"items\"" +
-                ":\""+ productidlist +"\",\"address\":\"" + address + "\"%7D")
+                ":\""+ productidlist +"\",\"address\":\"" + address + "\"%7D")*/
+        val call = ApiClient().service.order("admin/apis/order1.php?o="+jsonTut)
         call.enqueue(object : Callback<String> {
             override fun onResponse(
                     call: Call<String>,
                     response: Response<String>
             ) {
                 if(response.body() != null) {
+                    Log.e("ResultMsz=?",response.body().toString())
                     // productList!!.value = response.body()?.data
-                Toast.makeText(context,"Order successfully",Toast.LENGTH_LONG).show()
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    Global.cartList.clear()
+                    callordersuccesfullydialog()
+//                Toast.makeText(context,"Order successfully",Toast.LENGTH_LONG).show()
+
+
 //                        val intent
 
                 }
-                Log.e("ResultMsz=?",response.body().toString())
+
 
             }
 
@@ -167,6 +208,35 @@ binding.back.setOnClickListener {
                 Log.e("ErrorMsz==>", t.message.toString())
             }
         })
+    }
+
+    private fun callordersuccesfullydialog() {
+        val dialog = Dialog(requireContext(), R.style.Theme_Dialog)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        val paymntbinding = PaymentSucccesfulDialogBinding.inflate(layoutInflater)
+        dialog.setContentView(paymntbinding.root)
+        dialog.window!!.setBackgroundDrawable(
+            ColorDrawable(Color.TRANSPARENT)
+        )
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.gravity = Gravity.CENTER
+
+        dialog.window!!.attributes = lp
+
+        (paymntbinding.imagetick.drawable as Animatable).start()
+        paymntbinding.proceed.setOnClickListener(View.OnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            Global.cartList.clear()
+            dialog.dismiss()
+        })
+
+        dialog.show()
     }
 
     private fun validation(
