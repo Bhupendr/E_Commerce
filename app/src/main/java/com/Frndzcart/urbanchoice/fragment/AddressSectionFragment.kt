@@ -180,11 +180,12 @@ binding.back.setOnClickListener {
     }
 
     private fun callApi(address: Editable?, productidlist: String, jsonTut: String) {
-
+        Log.e("json",jsonTut)
         /*val call = ApiClient().service.order("admin/apis/order.php?o=%7B\"customer_id\":"+ Global.customerid +"," +
                 "\"total_amount\":"+ Global.pricing.toString() +",\"items\"" +
                 ":\""+ productidlist +"\",\"address\":\"" + address + "\"%7D")*/
         val call = ApiClient().service.order("admin/apis/order1.php?o="+jsonTut)
+
         call.enqueue(object : Callback<String> {
             override fun onResponse(
                     call: Call<String>,

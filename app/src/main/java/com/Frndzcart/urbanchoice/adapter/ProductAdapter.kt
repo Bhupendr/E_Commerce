@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.urbanchoice.Global.Global
@@ -55,75 +56,81 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
     override fun onBindViewHolder(holder: Category_Holder, position: Int) {
 
 
-        val listdata = arrayList[position]
-        if(checkItemInCart(listdata)){
-            holder.add_quantity.isVisible = true
-            holder.add_new_item.isVisible = false
+        try {
+
+            val listdata = arrayList[position]
+            if (checkItemInCart(listdata)) {
+                holder.add_quantity.isVisible = true
+                holder.add_new_item.isVisible = false
+                holder.total.text = listdata.quantity.toString()
+            }
+            holder.item_name.text = listdata.title
+
+            holder.item_price.text = context.resources.getString(R.string.rupees, listdata.mrp)
+            holder.discounted_price.text =
+                context.resources.getString(R.string.rupees, listdata.price)
             holder.total.text = listdata.quantity.toString()
-        }
-        holder.item_name.text = listdata.title
+            val url = Global.BASE_Image_URL + "admin/icon_file/" + listdata.icon_file
+            Log.e("url", url)
+            Glide.with(context).load(url)
+                .placeholder(R.drawable.launchericon) //5
+                .error(R.drawable.ic_baseline_broken_image_24) //6
+                .fallback(R.drawable.launchericon)
+                .dontAnimate()
+                .into(holder.item_image)
 
-        holder.item_price.text = context.resources.getString(R.string.rupees,listdata.mrp)
-        holder.discounted_price.text = context.resources.getString(R.string.rupees,listdata.price)
-        holder.total.text = listdata.quantity.toString()
-        val url = Global.BASE_Image_URL +"admin/icon_file/"+listdata.icon_file
-        Log.e("url", url)
-        Glide.with(context).load(url)
-          .placeholder(R.drawable.launchericon) //5
-            .error(R.drawable.ic_baseline_broken_image_24) //6
-            .fallback(R.drawable.launchericon)
-            .dontAnimate()
-            .into(holder.item_image)
+            val marginpprice = listdata.mrp.toInt() - listdata.price.toInt()
 
-        val marginpprice = listdata.mrp.toInt() - listdata.price.toInt()
-
-        holder.offer_percent.text = "Rs " + marginpprice.toString() +  " save"
-        if(marginpprice ==0){
-            holder.red_offer_img.isVisible = false
-        }else{
-            holder.item_price.strike = true
-        }
+            holder.offer_percent.text = "Rs " + marginpprice.toString() + " save"
+            if (marginpprice == 0) {
+                holder.red_offer_img.isVisible = false
+            } else {
+                holder.item_price.strike = true
+            }
 //        holder.weight.text = listdata.weght
 
-        holder.add.setOnClickListener(View.OnClickListener {
-            listdata.quantity = 1
-            vibe.vibrate(80)
-            holder.add_quantity.isVisible = true
-            holder.add_new_item.isVisible = false
-            holder.total.text = listdata.quantity.toString()
+            holder.add.setOnClickListener(View.OnClickListener {
+                listdata.quantity = 1
+                vibe.vibrate(80)
+                holder.add_quantity.isVisible = true
+                holder.add_new_item.isVisible = false
+                holder.total.text = listdata.quantity.toString()
 
 
 
-            if(addtolist(listdata) ){
-                Global.cartList.add(listdata)
-            }
+                if (addtolist(listdata)) {
+                    Global.cartList.add(listdata)
+                }
 
-            count.onCount(Global.cartList.size)
+                count.onCount(Global.cartList.size)
 
-        })
+            })
 
-        holder.plus.setOnClickListener {
-            listdata.quantity++
-            holder.total.text = listdata.quantity.toString()
-            addquantitytolist(listdata)
-
-        }
-
-        holder.minus.setOnClickListener {
-
-            if (listdata.quantity > 1) {
-                listdata.quantity--
+            holder.plus.setOnClickListener {
+                listdata.quantity++
                 holder.total.text = listdata.quantity.toString()
                 addquantitytolist(listdata)
-            } else {
-                holder.add_quantity.isVisible = false
-                holder.add_new_item.isVisible = true
-                Global.cartList.remove(listdata)
-                deleteitem(listdata)
 
             }
-            count.onCount(Global.cartList.size)
-            // notifyDataSetChanged()
+
+            holder.minus.setOnClickListener {
+
+                if (listdata.quantity > 1) {
+                    listdata.quantity--
+                    holder.total.text = listdata.quantity.toString()
+                    addquantitytolist(listdata)
+                } else {
+                    holder.add_quantity.isVisible = false
+                    holder.add_new_item.isVisible = true
+                    Global.cartList.remove(listdata)
+                    deleteitem(listdata)
+
+                }
+                count.onCount(Global.cartList.size)
+                // notifyDataSetChanged()
+            }
+        }catch (e : Exception){
+            Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show()
         }
 
     }
