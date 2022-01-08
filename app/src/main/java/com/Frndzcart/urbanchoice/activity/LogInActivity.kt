@@ -61,6 +61,7 @@ class LogInActivity : AppCompatActivity() {
     }
 
     fun LogIn(username: String, mobile: String) {
+        Log.e("url","admin/apis/login.php?phone=" + "${mobile}" + "&name=" + "${username}")
         val call = ApiClient().service.login("admin/apis/login.php?phone=" + "${mobile}" + "&name=" + "${username}")
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(

@@ -58,6 +58,7 @@ class OrderFragment : Fragment() {
     }
 
     private fun callApi() {
+        Log.e("url","admin/apis/customer-order.php?customer_id=" + Global.customerid)
         val call = ApiClient().service.orderlist("admin/apis/customer-order.php?customer_id=" + Global.customerid)
         call.enqueue(object : Callback<OrderResponse> {
             override fun onResponse(

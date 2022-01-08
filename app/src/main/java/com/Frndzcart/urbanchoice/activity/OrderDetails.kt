@@ -59,6 +59,7 @@ class OrderDetails : AppCompatActivity(){
     }
 
     private fun callApi(orderId: String) {
+        Log.e("url","admin/apis/order-one1.php?o=%22"+orderId+"%22")
         val call = ApiClient().service.particularorder("admin/apis/order-one1.php?o=%22"+orderId+"%22")
         call.enqueue(object : Callback<ParticularOrderResponse> {
             override fun onResponse(
@@ -66,7 +67,7 @@ class OrderDetails : AppCompatActivity(){
                     response: Response<ParticularOrderResponse>
             ) {
                 if(response.body() != null) {
-                    Log.e("ResultMsz=?",response.body().toString())
+
                     particularOrderResponse = response.body()!!
                     itemDetail.addAll(particularOrderResponse.item_details)
                     linearLayoutManager = LinearLayoutManager(this@OrderDetails, LinearLayoutManager.VERTICAL, false)
@@ -81,7 +82,7 @@ class OrderDetails : AppCompatActivity(){
 
             override fun onFailure(call: Call<ParticularOrderResponse>, t: Throwable) {
                 binding.progressBar.isVisible = false
-                Log.e("ErrorMsz==>", t.message.toString())
+
             }
         })
     }

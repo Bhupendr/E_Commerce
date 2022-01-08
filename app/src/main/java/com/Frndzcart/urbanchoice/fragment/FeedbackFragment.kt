@@ -69,6 +69,7 @@ class FeedbackFragment : Fragment() {
     }
 
     private fun callApi(jsonTut: String) {
+        Log.e("url","/admin/apis/feedback.php?feedback=" +jsonTut)
         val call = ApiClient().service.feedback("/admin/apis/feedback.php?feedback=" +jsonTut)
         call.enqueue(object : Callback<String> {
             override fun onResponse(
@@ -77,7 +78,7 @@ class FeedbackFragment : Fragment() {
             ) {
                 if(response.body() != null) {
 
-                    Log.e("ResultMsz=?",response.body().toString())
+
                     Toast.makeText(context,"Thank you!! Your response has been recorded",Toast.LENGTH_LONG).show()
 
                     val intent = Intent(context, MainActivity::class.java)
@@ -88,7 +89,7 @@ class FeedbackFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("ErrorMsz==>", t.message.toString())
+
             }
         })
     }
