@@ -15,10 +15,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.Frndzcart.urbanchoice.Global.Global
 import com.Frndzcart.urbanchoice.R
-import com.Frndzcart.urbanchoice.model.ProductResponseItem
 import com.Frndzcart.urbanchoice.`interface`.counter
+import com.Frndzcart.urbanchoice.model.ProductResponseItem
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 
 class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>()  {
@@ -89,50 +88,18 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
             }
 //        holder.weight.text = listdata.weght
 
-            holder.add.setOnClickListener(View.OnClickListener {
-                listdata.quantity = 1
-                vibe.vibrate(80)
-                holder.add_quantity.isVisible = true
-                holder.add_new_item.isVisible = false
-                holder.total.text = listdata.quantity.toString()
 
 
 
-                if (addtolist(listdata)) {
-                    Global.cartList.add(listdata)
-                }
-
-                count.onCount(Global.cartList.size)
-
-            })
-
-            holder.plus.setOnClickListener {
-                listdata.quantity++
-                holder.total.text = listdata.quantity.toString()
-                addquantitytolist(listdata)
-
-            }
-
-            holder.minus.setOnClickListener {
-
-                if (listdata.quantity > 1) {
-                    listdata.quantity--
-                    holder.total.text = listdata.quantity.toString()
-                    addquantitytolist(listdata)
-                } else {
-                    holder.add_quantity.isVisible = false
-                    holder.add_new_item.isVisible = true
-                    Global.cartList.remove(listdata)
-                    deleteitem(listdata)
-
-                }
-                count.onCount(Global.cartList.size)
-                // notifyDataSetChanged()
-            }
-        }catch (e : Exception){
-            Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show()
+        }catch (e: Exception){
+            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     private fun deleteitem(listdata: ProductResponseItem) {
@@ -147,7 +114,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
     private fun addquantitytolist(listdata: ProductResponseItem) {
         for(im : ProductResponseItem? in Global.cartList){
             if(im!!.id.equals(listdata.id)){
-                Global.cartList.set(Global.cartList.indexOf(im),listdata)
+                Global.cartList.set(Global.cartList.indexOf(im), listdata)
             }
 //            notifyDataSetChanged()
 
@@ -157,7 +124,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
 
     }
 
-    private fun checkItemInCart( listdata: ProductResponseItem):Boolean {
+    private fun checkItemInCart(listdata: ProductResponseItem):Boolean {
         for(im : ProductResponseItem? in Global.cartList){
             if(im!!.id.equals(listdata.id)){
                 listdata.quantity = im.quantity
@@ -168,24 +135,12 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
     }
 
 
-    private fun addtolist(listdata: ProductResponseItem): Boolean {
-        for (im: ProductResponseItem? in Global.cartList){
-            if(im!!.id == listdata.id){
-
-                im.quantity = im.quantity + listdata.quantity
-
-                return false
-
-            }
-
-        }
-        return true
-    }
 
 
 
 
-    class Category_Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+   inner class Category_Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
         var red_offer_img : ImageView = itemView.findViewById(R.id.red_offer_img)
@@ -203,6 +158,64 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.Category_Holder>() 
         var total : TextView = itemView.findViewById(R.id.total)
         var add_quantity : LinearLayout = itemView.findViewById(R.id.add_quantity)
         var add_new_item : LinearLayout = itemView.findViewById(R.id.add_new_item)
+
+        init {
+
+           add.setOnClickListener(View.OnClickListener {
+               arrayList[adapterPosition].quantity = 1
+               vibe.vibrate(80)
+               add_quantity.isVisible = true
+               add_new_item.isVisible = false
+               total.text = arrayList[adapterPosition].quantity.toString()
+
+
+
+               if (addtolist(arrayList[adapterPosition])) {
+                   Global.cartList.add(arrayList[adapterPosition])
+               }
+
+               count.onCount(Global.cartList.size)
+//                notifyDataSetChanged()
+           })
+
+            plus.setOnClickListener {
+                arrayList[adapterPosition].quantity++
+               total.text = arrayList[adapterPosition].quantity.toString()
+                addquantitytolist(arrayList[adapterPosition])
+
+            }
+
+            minus.setOnClickListener {
+
+                if (arrayList[adapterPosition].quantity > 1) {
+                    arrayList[adapterPosition].quantity--
+                    total.text = arrayList[adapterPosition].quantity.toString()
+                    addquantitytolist(arrayList[adapterPosition])
+                } else {
+                    add_quantity.isVisible = false
+                   add_new_item.isVisible = true
+                    Global.cartList.remove(arrayList[adapterPosition])
+                    deleteitem(arrayList[adapterPosition])
+
+                }
+                count.onCount(Global.cartList.size)
+//                 notifyDataSetChanged()
+            }
+        }
+        private fun addtolist(listdata: ProductResponseItem): Boolean {
+            for (im: ProductResponseItem? in Global.cartList){
+                if(im!!.id == listdata.id){
+
+                    im.quantity = im.quantity + listdata.quantity
+
+                    return false
+
+                }
+
+            }
+            return true
+        }
+
 
     }
 }

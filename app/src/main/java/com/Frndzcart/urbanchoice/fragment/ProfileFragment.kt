@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.Frndzcart.urbanchoice.Global.Global
@@ -36,7 +37,9 @@ class ProfileFragment : Fragment() {
         val heading : TextView = activity?.findViewById(R.id.heading) as TextView
         heading.text = "Profile"
         val cart : ImageView  = activity?.findViewById(R.id.cart)!!
+        val countlayout : ConstraintLayout  = activity?.findViewById(R.id.count_layout)!!
         cart.isVisible = false
+        countlayout.isVisible = false
         binding.logout.setOnClickListener{
 
             Prefs.clear().apply()

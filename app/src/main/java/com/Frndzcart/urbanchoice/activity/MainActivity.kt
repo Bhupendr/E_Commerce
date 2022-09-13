@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(
+        this.window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
@@ -135,7 +136,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
                     .commit()
             return true
         }
-        return false
+        return true
     }
 
     override fun onCount(size: Int) {

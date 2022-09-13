@@ -290,16 +290,19 @@ binding.back.setOnClickListener {
     }
 
     override fun onTransactionFailed() {
+        binding.radiogroup.clearCheck()
         binding.upi.isChecked = false
         Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
     }
 
     override fun onTransactionCancelled() {
+        binding.radiogroup.clearCheck()
         binding.upi.isChecked = false
         Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
     }
 
     override fun onAppNotFound() {
+        binding.radiogroup.clearCheck()
         binding.upi.isChecked = false
         Toast.makeText(context, "App Not Found", Toast.LENGTH_SHORT).show()
     }

@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".Global.MyApp"
         android:allowBackup="true"
@@ -18,7 +22,8 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.E_Commerce">
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
