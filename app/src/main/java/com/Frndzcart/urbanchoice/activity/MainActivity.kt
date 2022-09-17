@@ -33,7 +33,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), counter,DrawerLock {
 
-
+    private lateinit var inAppUpdate: InAppUpdate
     private var toggle: ActionBarDrawerToggle? = null
     lateinit var binding : ActivityMainBinding
 
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         Global.classname = javaClass.name
         Global.customerid = Prefs.getString(Global.userID, "0")
         setSupportActionBar(binding.toolbar)
+        inAppUpdate = InAppUpdate(this)
        /* binding.search.isVisible = true
         binding.microphone.isVisible = true*/
         callFragment(Add_Product_fragment())
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        inAppUpdate.onActivityResult(requestCode,resultCode, data)
         when(requestCode){
             1 -> if (resultCode == RESULT_OK) {
                 val result = data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
@@ -167,6 +169,7 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
 
     override fun onResume() {
         super.onResume()
+        inAppUpdate.onResume()
         binding.navView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             binding.heading.text = item.title.toString()
             when (item.itemId) {
@@ -210,7 +213,10 @@ class MainActivity : AppCompatActivity(), counter,DrawerLock {
         })
 
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        inAppUpdate.onDestroy()
+    }
 
     private var doubleBackToExitPressedOnce = false
     override fun onBackPressed()
